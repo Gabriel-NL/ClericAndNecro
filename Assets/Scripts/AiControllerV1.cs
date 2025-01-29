@@ -11,6 +11,15 @@ public class AiControllerV1 : MonoBehaviour
 
     void Start()
     {
+        
+        if (agent.pathStatus == NavMeshPathStatus.PathComplete)
+        {
+            Debug.Log("Walkable surface found.");
+        }
+        else
+        {
+            Debug.Log("No walkable surface found.");
+        }
         agent.destination = player.position; 
         
     }
