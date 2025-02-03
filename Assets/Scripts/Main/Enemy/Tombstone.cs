@@ -13,12 +13,14 @@ public class Tombstone : MonoBehaviour
     private bool isSpawning = true;  // Flag to control spawning
     void Start()
     {
-        StartCoroutine(SpawnObjects());
+        
+        StartCoroutine(SpawnObjects()); 
     }
 
     // Coroutine to spawn objects at intervals
     private IEnumerator SpawnObjects()
     {
+
         while (true)
         {
             // Check if we can spawn a new object
