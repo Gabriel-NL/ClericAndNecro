@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    public float speed=50f;
     // This function is automatically called when the projectile collides with something
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,6 +26,12 @@ public class Projectile : MonoBehaviour
         }
 
         
+    }
+
+    void Update()
+    {
+        // Move the projectile forward in its local direction
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
 

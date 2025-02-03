@@ -28,12 +28,8 @@ public class PlayerShooting : MonoBehaviour
         if (projectilePrefab != null && firePoint != null)
         {
             GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+            projectile.transform.SetParent(transform);
 
-            if (projectileRb != null)
-            {
-                projectileRb.velocity = direction * projectileSpeed;
-            }
         }
         else
         {
