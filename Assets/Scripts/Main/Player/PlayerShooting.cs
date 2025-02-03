@@ -10,17 +10,27 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        // Rotate the player to face the mouse cursor
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePosition - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        // Shoot a projectile when the left mouse button is clicked
-        if (Input.GetMouseButtonDown(0))
+        try
         {
-            Shoot(direction);
+            // Rotate the player to face the mouse cursor
+
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePosition - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            // Shoot a projectile when the left mouse button is clicked
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot(direction);
+            }
         }
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
+            
+        }
+
     }
 
     void Shoot(Vector2 direction)
@@ -28,7 +38,7 @@ public class PlayerShooting : MonoBehaviour
         if (projectilePrefab != null && firePoint != null)
         {
             GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            projectile.transform.SetParent(transform);
+            //projectile.transform.SetParent(firePoint);
 
         }
         else

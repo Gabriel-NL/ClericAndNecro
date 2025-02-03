@@ -5,12 +5,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float speed=50f;
+    public float speed=5f;
     // This function is automatically called when the projectile collides with something
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Ops!");
+        }
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyData>().DealDamage(1);
@@ -28,7 +31,7 @@ public class Projectile : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Move the projectile forward in its local direction
         transform.Translate(Vector2.right * speed * Time.deltaTime);
