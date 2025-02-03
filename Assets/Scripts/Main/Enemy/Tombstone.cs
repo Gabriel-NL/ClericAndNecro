@@ -6,7 +6,7 @@ public class Tombstone : MonoBehaviour
 {
     
     public GameObject enemy_prefab;  // enemy_Prefab to spawn
-    public float radius = 2.0f;  // Radius for random spawn positions
+    private float radius = 1.5f;  // Radius for random spawn positions
     public float spawnTime = 2.0f;  // Time interval between spawns
     public int maxObjects = 4;  // Maximum number of objects allowed
     private List<GameObject> spawnedObjects = new List<GameObject>();  // List to track spawned objects
@@ -34,23 +34,41 @@ public class Tombstone : MonoBehaviour
     }
     private void SpawnObject()
     {
-        // Generate a random angle
-        float angle = Random.Range(0f, 360f);
-        Vector3 spawnPosition = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+        int maxAttempts = 10; // Prevent infinite loops
+        int attempts = 0;
 
-        // Instantiate the enemy_prefab at the random position
-        GameObject new_enemy = Instantiate(enemy_prefab, spawnPosition, Quaternion.identity);
-        new_enemy.GetComponent<EnemyData>().SetTombstoneParent(this);
-
-        // Add the spawned object to the list
-        spawnedObjects.Add(new_enemy);
-
-        // If we hit the max objects limit, stop spawning
-        if (spawnedObjects.Count >= maxObjects)
+        while (attempts < maxAttempts)
         {
-            isSpawning = false;
+            // Generate a random angle in degrees
+            float angle = Random.Range(0f, 360f);
+            float angleRad = Mathf.Deg2Rad * angle;
+
+            // Calculate the position (2D: X and Y)
+            Vector3 angle_pos = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * radius;
+            Vector3 spawnPosition = transform.position + angle_pos;
+
+            // Check if the position is valid using a 2D raycast
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, spawnPosition - transform.position, radius);
+
+            if (!hit.collider) // If nothing is blocking the spawn position
+            {
+                GameObject new_enemy = Instantiate(enemy_prefab, spawnPosition, Quaternion.identity);
+                new_enemy.GetComponent<EnemyData>().SetTombstoneParent(this);
+                spawnedObjects.Add(new_enemy);
+
+                // Stop spawning if we reach the max limit
+                if (spawnedObjects.Count >= maxObjects)
+                {
+                    isSpawning = false;
+                }
+
+                break; // Exit the loop since we successfully spawned
+            }
+
+            attempts++; // Increase attempts to avoid infinite loops
         }
     }
+
 
     // Call this function when an object is killed, passing the object as a parameter
     public void ObjectKilled(GameObject killedObject)
