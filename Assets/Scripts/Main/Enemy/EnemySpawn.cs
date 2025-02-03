@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tombstone : MonoBehaviour
+public class EnemySpawn : MonoBehaviour
 {
     
     public GameObject enemy_prefab;  // enemy_Prefab to spawn

@@ -6,7 +6,7 @@ public class EnemyData : MonoBehaviour
 {
     // Start is called before the first frame update
     private int health_points = 4;
-    private Tombstone tombstone_parent;
+    private EnemySpawn tombstone_parent;
     void Start()
     {
 
@@ -24,7 +24,7 @@ public class EnemyData : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void SetTombstoneParent(Tombstone obj)
+    public void SetTombstoneParent(EnemySpawn obj)
     {
         if (tombstone_parent == null)
         {
