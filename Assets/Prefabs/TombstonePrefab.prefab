@@ -131,8 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy_prefab: {fileID: 1903299984560388058, guid: 146e207060752044c8a0aabc847fb19a, type: 3}
+  debug: 1
   spawnTime: 2
-  maxObjects: 4
+  enemy_limit: 4
+  is_spawning: 1
 --- !u!61 &6387718928865296252
 BoxCollider2D:
   m_ObjectHideFlags: 0

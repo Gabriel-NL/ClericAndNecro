@@ -10,26 +10,30 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        try
-        {
-            // Rotate the player to face the mouse cursor
 
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = (mousePosition - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+        // Rotate the player to face the mouse cursor
 
-            // Shoot a projectile when the left mouse button is clicked
-            if (Input.GetMouseButtonDown(0))
-            {
-                Shoot(direction);
-            }
-        }
-        catch (System.Exception e)
+        // Get the mouse position in screen space
+        Vector3 mousePosition = Input.mousePosition;
+
+        // Validate if mousePosition is inside the screen bounds (non-negative values)
+        if (float.IsNaN(mousePosition.x) || float.IsNaN(mousePosition.y))
         {
-            Debug.LogException(e);
             
+            return; // Exit early if the position is invalid
         }
+
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // Shoot a projectile when the left mouse button is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot(direction);
+        }
+        
 
     }
 

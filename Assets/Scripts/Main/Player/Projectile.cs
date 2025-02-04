@@ -9,20 +9,19 @@ public class Projectile : MonoBehaviour
     // This function is automatically called when the projectile collides with something
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Ops!");
-        }
+
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyData>().DealDamage(1);
+   
             Destroy(gameObject);
             return; 
         }
         // Check if the object the projectile collides with has the "MapBorder" tag
         if (collision.gameObject.CompareTag("MapBorder"))
         {
+           
             // Destroy the projectile upon collision with MapBorder
             Destroy(gameObject);
             return;
