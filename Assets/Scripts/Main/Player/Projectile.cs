@@ -5,35 +5,30 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float speed=5f;
-    // This function is automatically called when the projectile collides with something
-    void OnCollisionEnter2D(Collision2D collision)
+    public float speed = 5f;
+
+    void OnTriggerEnter(Collider target_hit)
     {
-
-
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (target_hit.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyData>().DealDamage(1);
-   
+            target_hit.gameObject.GetComponent<EnemyData>().DealDamage(1);
+
             Destroy(gameObject);
-            return; 
+            return;
         }
         // Check if the object the projectile collides with has the "MapBorder" tag
-        if (collision.gameObject.CompareTag("MapBorder"))
+        if (target_hit.gameObject.CompareTag("MapBorder"))
         {
-           
+
             // Destroy the projectile upon collision with MapBorder
             Destroy(gameObject);
             return;
         }
-
-        
     }
-
     void FixedUpdate()
     {
         // Move the projectile forward in its local direction
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
 

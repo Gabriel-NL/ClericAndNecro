@@ -53,7 +53,7 @@ public class EnemySpawn : MonoBehaviour
             {
                 // Spawn tombstone if no collisions
                 GameObject new_enemy = Instantiate(enemy_prefab, spawnPosition, Quaternion.identity, gameObject.transform);
-                new_enemy.GetComponent<EnemyData>().SetTombstoneParent(this);
+                //new_enemy.GetComponent<EnemyData>().SetTombstoneParent(this);
                 spawned_enemies.Add(new_enemy);
                 
             }
