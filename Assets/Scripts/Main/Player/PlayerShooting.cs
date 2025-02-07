@@ -20,8 +20,6 @@ public class PlayerShooting : MonoBehaviour
         HandlePlayerRotation();
         HandleShooting();
 
-        
-
     }
     private void HandlePlayerRotation()
     {
@@ -60,8 +58,6 @@ public class PlayerShooting : MonoBehaviour
         if (projectilePrefab != null && firePoint != null)
         {
             GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            //projectile.transform.SetParent(firePoint);
-
         }
         else
         {

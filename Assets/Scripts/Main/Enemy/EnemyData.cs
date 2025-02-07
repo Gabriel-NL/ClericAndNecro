@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyData : MonoBehaviour
 {
-    // Start is called before the first frame update
     private int health_points = 4;
     void Start()
     {
@@ -22,7 +21,5 @@ public class EnemyData : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 
 }

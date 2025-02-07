@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     public float speed = 5f;
 
     void OnTriggerEnter(Collider target_hit)
-    {
+   {
         if (target_hit.gameObject.CompareTag("Enemy"))
         {
             target_hit.gameObject.GetComponent<EnemyData>().DealDamage(1);
@@ -20,7 +19,7 @@ public class Projectile : MonoBehaviour
         if (target_hit.gameObject.CompareTag("MapBorder"))
         {
 
-            // Destroy the projectile upon collision with MapBorder
+
             Destroy(gameObject);
             return;
         }
