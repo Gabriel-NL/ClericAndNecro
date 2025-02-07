@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Vector2 movement;
 
     private Rigidbody2D rb;
 
+
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Update()
+
+
+    void FixedUpdate()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");

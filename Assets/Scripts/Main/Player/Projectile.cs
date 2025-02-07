@@ -8,14 +8,12 @@ public class Projectile : MonoBehaviour
     public float speed=5f;
     void OnCollisionEnter2D(Collision2D collision)
     {
-
-
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (target_hit.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyData>().DealDamage(1);
-   
+            target_hit.gameObject.GetComponent<EnemyData>().DealDamage(1);
+
             Destroy(gameObject);
-            return; 
+            return;
         }
 
         if (collision.gameObject.CompareTag("MapBorder"))
@@ -23,10 +21,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        
     }
-
     void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
