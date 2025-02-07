@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyData : MonoBehaviour
 {
-    // Start is called before the first frame update
     private int health_points = 4;
     private EnemySpawn tombstone_parent;
     void Start()
@@ -33,7 +32,6 @@ public class EnemyData : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
 

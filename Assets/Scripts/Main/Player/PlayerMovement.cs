@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed of the player's movement
-    private Vector2 movement; // Store the player's movement input
+    public float moveSpeed = 5f;
+    private Vector2 movement;
 
-    private Rigidbody2D rb; // Reference to the Rigidbody2D component
+    private Rigidbody2D rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
+        rb = GetComponent<Rigidbody2D>();
 
         if (rb == null)
         {
-            Debug.LogError("No Rigidbody2D found on the player object!");
+            Debug.LogError("No Rigidbody2D found on the player object!"); 
         }
     }
 
     void Update()
     {
-        // Get input from the player (WASD or arrow keys)
-        movement.x = Input.GetAxisRaw("Horizontal"); // Left/right input
-        movement.y = Input.GetAxisRaw("Vertical");   // Up/down input
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        // Normalize movement to prevent faster diagonal movement
         if (movement.magnitude > 1)
         {
             movement.Normalize();
@@ -34,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Move the player using Rigidbody2D
         rb.velocity = movement * moveSpeed;
     }
 }
