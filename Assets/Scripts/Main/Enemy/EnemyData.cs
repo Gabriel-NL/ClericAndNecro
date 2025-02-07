@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     private int health_points = 4;
+    private EnemySpawn tombstone_parent;
     void Start()
     {
 
@@ -18,10 +19,21 @@ public class EnemyData : MonoBehaviour
         }
         else
         {
+            tombstone_parent.ObjectKilled(gameObject);
             Destroy(gameObject);
         }
     }
+    public void SetTombstoneParent(EnemySpawn obj)
+    {
+        if (tombstone_parent == null)
+        {
+            tombstone_parent = obj;
 
+        }
+    }
 
+    void Update()
+    {
 
+    }
 }

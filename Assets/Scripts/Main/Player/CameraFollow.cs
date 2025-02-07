@@ -8,13 +8,12 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 5f;
     public Vector3 offset = new Vector3(0f, 0f, -10f);
 
-
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (player != null)
         {
             Vector3 targetPosition = player.position + offset;
-            camera.transform.position = Vector3.Lerp(camera.transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
         }
     }
 }
