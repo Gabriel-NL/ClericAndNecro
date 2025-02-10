@@ -5,18 +5,23 @@ public class HealthSystem : MonoBehaviour
 {
     public int maxHealth = 3;
     private int currentHealth;
-
-    public Image[] hearts; // Assign heart images in the Inspector
+    public Transform hearts_parent;
+    public Image[] hearts_array; // Assign heart images in the Inspector
 
     void Start()
     {
+        int childCount = hearts_parent.childCount;
+        hearts_array = new Image[childCount];
+
+        for (int i = 0; i < childCount; i++)
+        {
+            hearts_array[i] = hearts_parent.GetChild(i).GetChild(0).GetComponent<Image>();
+        }
         currentHealth = maxHealth;
         UpdateHealthUI();
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Enemy"))
+    private void OnCollisionEnter(Collision collided_obj) {
+        if (collided_obj.collider.CompareTag("Enemy"))
         {
             TakeDamage(1);
         }
@@ -42,15 +47,15 @@ public class HealthSystem : MonoBehaviour
     void UpdateHealthUI()
     {
         // Loop through hearts and enable/disable them based on health
-        for (int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < hearts_array.Length; i++)
         {
             if (i < currentHealth)
             {
-                hearts[i].enabled = true; // Show heart
+                hearts_array[i].enabled = true; // Show heart
             }
             else
             {
-                hearts[i].enabled = false; // Hide heart
+                hearts_array[i].enabled = false; // Hide heart
             }
         }
     }

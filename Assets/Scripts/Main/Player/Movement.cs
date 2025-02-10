@@ -11,20 +11,19 @@ public class Movement : MonoBehaviour
 
     public Rigidbody rb; // Reference to the Rigidbody2D component
 
-    
+
     void Start()
     {
 
-        rb = GetComponent<Rigidbody>();
-
         if (rb == null)
         {
-            Debug.LogError("No Rigidbody2D found on the player object!"); 
+            Debug.LogError("No Rigidbody2D found on the player object!");
         }
     }
 
-    public void HandleMovement(){
-// Get input from the player (WASD or arrow keys)
+    public void HandleMovement()
+    {
+        // Get input from the player (WASD or arrow keys)
         movement.x = Input.GetAxisRaw("Horizontal"); // Left/right input
         movement.z = Input.GetAxisRaw("Vertical");   // Up/down input
 
