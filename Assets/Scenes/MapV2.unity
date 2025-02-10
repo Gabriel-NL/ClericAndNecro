@@ -1049,7 +1049,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1238670035}
   - component: {fileID: 1238670034}
-  - component: {fileID: 1238670033}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1057,26 +1056,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1238670033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1238670032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1238670034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,6 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed33d125fb19a04dbe2a3178e48e804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   player: {fileID: 1845413433}
   smoothSpeed: 5
   offset: {x: 0, y: 0, z: -10}
@@ -1227,7 +1207,6 @@ GameObject:
   - component: {fileID: 1845413433}
   - component: {fileID: 1845413432}
   - component: {fileID: 1845413430}
-  - component: {fileID: 1845413434}
   - component: {fileID: 1845413435}
   - component: {fileID: 1845413436}
   - component: {fileID: 1845413437}
@@ -1334,19 +1313,6 @@ Transform:
   - {fileID: 284588247}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1845413434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845413429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb27be5b51d1af46b9e2f9ad4a99143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!114 &1845413435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,6 +1328,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8014397695293460773, guid: c3937ad0d0a52804796b973bb7591804, type: 3}
   firePoint: {fileID: 985835765}
   projectileSpeed: 10
+  player: {fileID: 0}
+  fireRate: 0.5
 --- !u!61 &1845413436
 BoxCollider2D:
   m_ObjectHideFlags: 0
