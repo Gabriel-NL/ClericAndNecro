@@ -255,6 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6a3cdc6f052f24db73f1ad4f547dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsWorth: 10
+  healingItemPrefab: {fileID: 6174147035106072592, guid: 62bcd9a2530dad644be09f4396036ea2, type: 3}
 --- !u!114 &6280840934277676703
 MonoBehaviour:
   m_ObjectHideFlags: 0

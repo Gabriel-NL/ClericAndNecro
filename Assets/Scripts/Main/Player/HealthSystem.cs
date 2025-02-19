@@ -87,4 +87,10 @@ public class HealthSystem : MonoBehaviour
             hearts_array[i].enabled = i < currentHealth;
         }
     }
+
+    public void Heal(int amount)
+{
+    currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // Prevent overheal
+    UpdateHealthUI();
+}
 }

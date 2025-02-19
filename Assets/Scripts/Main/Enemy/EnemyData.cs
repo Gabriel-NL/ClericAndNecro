@@ -6,6 +6,8 @@ public class EnemyData : MonoBehaviour
 {
     private int health_points = 4;
     public int pointsWorth = 10;
+    public GameObject healingItemPrefab; // Assign a HealingItem prefab in the Inspector
+    
     void Start()
     {
 
@@ -19,6 +21,11 @@ public class EnemyData : MonoBehaviour
         }
         else
         {
+             if (healingItemPrefab != null)
+        {
+            Instantiate(healingItemPrefab, transform.position, Quaternion.Euler(90, 0, 0));
+        }
+
             Destroy(gameObject);
 
             // Add score when enemy is killed
