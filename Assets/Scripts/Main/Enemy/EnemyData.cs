@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     private int health_points = 4;
+    public int pointsWorth = 10;
     void Start()
     {
 
@@ -19,6 +20,10 @@ public class EnemyData : MonoBehaviour
         else
         {
             Destroy(gameObject);
+
+            // Add score when enemy is killed
+            ScoreManager.Instance.AddScore(pointsWorth);
+
         }
     }
 
