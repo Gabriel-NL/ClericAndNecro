@@ -11,6 +11,7 @@ public class HealthSystem : MonoBehaviour
     
     public float invincibilityDuration = 1.5f; // Duration of invincibility
     private bool isInvincible = false; // Tracks if the player is invincible
+    public GameOverManager gameOverManager;
 
     void Start()
     {
@@ -76,6 +77,7 @@ public class HealthSystem : MonoBehaviour
 
     void Die()
     {
+        gameOverManager.TriggerGameOver();
         Debug.Log("Player Died!");
         gameObject.SetActive(false);
     }
