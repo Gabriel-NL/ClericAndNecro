@@ -5,24 +5,27 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed = 5f;
+    public int damage=1;
 
     void OnTriggerEnter(Collider target_hit)
    {
-        if (target_hit.gameObject.CompareTag("Enemy"))
+        string target_tag=target_hit.gameObject.tag;
+       
+        switch (target_tag)
         {
-            target_hit.gameObject.GetComponent<EnemyData>().DealDamage(1);
+            case "Enemy":
+            target_hit.gameObject.GetComponent<EnemyData>().DealDamage(damage);
+            break;
+            case "Tomb":
+            target_hit.gameObject.GetComponent<TombData>().DealDamage(damage);
+            break;
+            case "MapBorder":
+            break;
 
-            Destroy(gameObject);
-            return;
+            default:
+            break;
         }
-        // Check if the object the projectile collides with has the "MapBorder" tag
-        if (target_hit.gameObject.CompareTag("MapBorder"))
-        {
-
-
-            Destroy(gameObject);
-            return;
-        }
+        Destroy(gameObject);
     }
     void FixedUpdate()
     {
