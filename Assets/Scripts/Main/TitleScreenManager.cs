@@ -7,11 +7,16 @@ public class TitleScreenManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Pseudo2DMap"); // Replace "GameScene" with your actual game scene name
+        SceneManager.LoadScene("Pseudo2DMap");
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ViewScores()
+    {
+        SceneManager.LoadScene("HighScoreScene");
     }
 }

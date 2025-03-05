@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,35 +6,51 @@ using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
-    public Image gameOverScreen; // Assign the black UI image in Inspector
-    public TextMeshProUGUI gameOverText; // Assign the red text in Inspector
-    public TextMeshProUGUI finalScoreText; // Assign the final score text in Inspector
-    public Button returnToTitleButton; // Assign the button in the Inspector
+    public Image gameOverScreen;
+    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI finalScoreText;
+    public TMP_InputField nameInputField;
+    public Button submitScoreButton;
+    public Button returnToTitleButton;
+
     public float fadeDuration = 2f;
+    private int finalScore;
+
+    private void Start()
+    {
+        // Hide all UI elements except the input field initially
+        gameOverScreen.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);
+        finalScoreText.gameObject.SetActive(false);
+        submitScoreButton.gameObject.SetActive(false);
+        returnToTitleButton.gameObject.SetActive(false);
+        nameInputField.gameObject.SetActive(false);
+    }
 
     public void TriggerGameOver()
     {
-        finalScoreText.text = "Final Score: " + ScoreManager.Instance.score.ToString();
-        finalScoreText.gameObject.SetActive(true);
-        returnToTitleButton.gameObject.SetActive(false); // Hide button during fade
+        finalScore = ScoreManager.Instance.score;
+        finalScoreText.text = "Final Score: " + finalScore;
 
         StartCoroutine(FadeToBlack());
     }
 
-    IEnumerator FadeToBlack()
+    private IEnumerator FadeToBlack()
     {
         float elapsedTime = 0f;
-        Color screenColor = gameOverScreen.color;
-        Color textColor = gameOverText.color;
-        Color scoreTextColor = finalScoreText.color;
 
+        // Show UI elements for fading
         gameOverScreen.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
         finalScoreText.gameObject.SetActive(true);
 
+        Color screenColor = gameOverScreen.color;
+        Color textColor = gameOverText.color;
+        Color scoreTextColor = finalScoreText.color;
+
         while (elapsedTime < fadeDuration)
         {
-            float alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+            float alpha = elapsedTime / fadeDuration;
             gameOverScreen.color = new Color(screenColor.r, screenColor.g, screenColor.b, alpha);
             gameOverText.color = new Color(textColor.r, textColor.g, textColor.b, alpha);
             finalScoreText.color = new Color(scoreTextColor.r, scoreTextColor.g, scoreTextColor.b, alpha);
@@ -43,17 +58,50 @@ public class GameOverManager : MonoBehaviour
             yield return null;
         }
 
-        // Ensure full visibility after fade
+        // Fully show elements after fade
         gameOverScreen.color = new Color(screenColor.r, screenColor.g, screenColor.b, 1);
         gameOverText.color = new Color(textColor.r, textColor.g, textColor.b, 1);
         finalScoreText.color = new Color(scoreTextColor.r, scoreTextColor.g, scoreTextColor.b, 1);
 
-        // Show the button after fade
-        returnToTitleButton.gameObject.SetActive(true);
+        // Show name input and submit button
+        nameInputField.gameObject.SetActive(true);
+        submitScoreButton.gameObject.SetActive(true);
+    }
+
+    public void SubmitScore()
+{
+    string playerName = nameInputField.text.Trim();
+    
+    // Limit to 8 characters
+    if (playerName.Length > 8)
+    {
+        playerName = playerName.Substring(0, 8);
+    }
+
+    if (string.IsNullOrEmpty(playerName))
+    {
+        playerName = "Anonymous"; // Default name if empty
+    }
+
+    SaveScore(playerName, finalScore);
+
+    // Hide input and show return button
+    nameInputField.gameObject.SetActive(false);
+    submitScoreButton.gameObject.SetActive(false);
+    returnToTitleButton.gameObject.SetActive(true);
+}
+
+    private void SaveScore(string name, int score)
+    {
+        int numScores = PlayerPrefs.GetInt("NumScores", 0);
+        PlayerPrefs.SetString("PlayerName" + numScores, name);
+        PlayerPrefs.SetInt("Score" + numScores, score);
+        PlayerPrefs.SetInt("NumScores", numScores + 1);
+        PlayerPrefs.Save();
     }
 
     public void ReturnToTitle()
     {
-        SceneManager.LoadScene("TitleScreen"); // Change "TitleScreen" to your actual title screen scene name
+        SceneManager.LoadScene("TitleScreen");
     }
 }
