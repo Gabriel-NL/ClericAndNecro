@@ -19,12 +19,10 @@ public class EnemyControl : MonoBehaviour
     private Vector3 min_bounds, max_bounds;
     private int wave = 0;
 
-
     [Header("Tombstone Configs")]
     private List<GameObject> created_tombstones;
     private int tombstone_limit = 1;
     public float tombstone_internal_clock = 1.5f;
-
 
     [Header("Enemy Configs")]
     public GameObject enemy_prefab; // The tombstone prefab to spawn
@@ -48,7 +46,6 @@ public class EnemyControl : MonoBehaviour
         StartCoroutine(TombstoneSpawner());
         StartCoroutine(EnemySpawner());
         wave = 1;
-
     }
 
     private (Vector3, Vector3) CalculateSpawnBounds()
@@ -72,22 +69,6 @@ public class EnemyControl : MonoBehaviour
             yield return new WaitForSeconds(tombstone_internal_clock);
         }
     }
-
-
-
-    private IEnumerator EnemySpawner()
-    {
-
-        while (canSpawn)
-        {
-            SpawnEnemiesAroundTombstones();
-
-            yield return new WaitForSeconds(enemy_internal_clock);
-        }
-    }
-
-
-
 
     private GameObject SpawnTombstone(Vector3 min_bounds, Vector3 max_bounds)
     {
@@ -118,10 +99,8 @@ public class EnemyControl : MonoBehaviour
             if (isClear)
             {
                 // Instantiate and set as child of spawnParent
-                tombstone = Instantiate(tombstone_prefab, spawnPos, Quaternion.identity);
-                Vector3 originalScale = tombstone.transform.lossyScale; // Store world scale
+                tombstone = Instantiate(tombstone_prefab, spawnPos, tombstone_prefab.transform.rotation);
                 tombstone.transform.SetParent(spawnParent, worldPositionStays: true);
-                tombstone.transform.localScale = spawnParent.InverseTransformVector(originalScale); // Adjust for new parent
 
                 return tombstone;
             }
@@ -143,6 +122,17 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
+        private IEnumerator EnemySpawner()
+    {
+
+        while (canSpawn)
+        {
+            SpawnEnemiesAroundTombstones();
+
+            yield return new WaitForSeconds(enemy_internal_clock);
+        }
+    }
+
     private void SpawnEnemiesAroundTombstones()
     {
 
@@ -151,6 +141,8 @@ public class EnemyControl : MonoBehaviour
         bool isClear;
         GameObject enemy;
         double extra_hp = 0;
+        Bounds bounds = tombstone_prefab.GetComponent<Renderer>().bounds;
+        float checkRadius = Mathf.Max(bounds.extents.x, bounds.extents.z);
 
         foreach (GameObject tombstoneObj in created_tombstones)
         {
@@ -158,30 +150,38 @@ public class EnemyControl : MonoBehaviour
             {
                 break;
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
 
                 tombstonePosition = tombstoneObj.transform.position;
                 // Random position within the square radius around the tombstone
-                randomX = Random.Range(tombstonePosition.x - enemy_spawn_radius, tombstonePosition.x + enemy_spawn_radius);
-                randomZ = Random.Range(tombstonePosition.z - enemy_spawn_radius, tombstonePosition.z + enemy_spawn_radius);
+                randomX = Random.Range(
+    tombstonePosition.x - enemy_spawn_radius - bounds.extents.x,
+    tombstonePosition.x + enemy_spawn_radius + bounds.extents.x
+                );
+                randomZ = Random.Range(
+                    tombstonePosition.z - enemy_spawn_radius - bounds.extents.z,
+                    tombstonePosition.z + enemy_spawn_radius + bounds.extents.z
+                );
                 spawnPos = new Vector3(randomX, tombstonePosition.y, randomZ);
 
                 // Check for obstacles
                 isClear = Physics.OverlapSphere(spawnPos, enemy_spawn_radius, obstacleLayer).Length == 0;
-                
+
                 if (isClear)
                 {
                     // Instantiate the enemy and set as child of the tombstone (or other parent)
                     enemy = Instantiate(enemy_prefab, spawnPos, Quaternion.identity);
                     //enemy.transform.SetParent(tombstoneObj.transform, worldPositionStays: true);
+                    
                     enemies_generated.Add(enemy);
                     enemy.transform.SetParent(enemy_list_parent.transform, true);
                     extra_hp = tombstoneObj.GetComponent<TombData>().GetExtraHP();
                     enemy.GetComponent<EnemyData>().AddExtraHP(extra_hp);
                     // Exit the inner loop once an enemy has been successfully spawned
                     break;
-                }else
+                }
+                else
                 {
                     continue;
                 }
@@ -190,6 +190,11 @@ public class EnemyControl : MonoBehaviour
 
         }
 
+    }
+
+    public void OnEnemyDestroy(GameObject destroyed_obj)
+    {
+        created_tombstones.Remove(destroyed_obj);
     }
 
 }

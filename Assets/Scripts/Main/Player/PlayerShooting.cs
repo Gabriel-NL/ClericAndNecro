@@ -27,6 +27,10 @@ public class PlayerShooting : MonoBehaviour
         // Get the mouse position in screen space
         mousePosition = Input.mousePosition;
 
+        if (float.IsInfinity(mousePosition.x) || float.IsInfinity(mousePosition.y) || float.IsInfinity(mousePosition.z))
+        {
+            return;
+        }
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.y = player.transform.position.y;  // Set Y to player's Y to ignore vertical difference
 
@@ -38,8 +42,9 @@ public class PlayerShooting : MonoBehaviour
 
         player.transform.rotation = Quaternion.Euler(0, angle, 0);
     }
-    private void HandleShooting(){
-        
+    private void HandleShooting()
+    {
+
         // Decrease the fireTimer based on time passed
         fireTimer -= Time.deltaTime;
 

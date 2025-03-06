@@ -35,11 +35,11 @@ public class EnemyData : MonoBehaviour
             {
                 Instantiate(healingItemPrefab, transform.position, Quaternion.Euler(90, 0, 0));
             }
-
-            Destroy(gameObject);
-
+            GameObject.FindFirstObjectByType<EnemyControl>().OnEnemyDestroy(gameObject);
             // Add score when enemy is killed
             ScoreManager.Instance.AddScore(pointsWorth);
+            Destroy(gameObject);
+
 
         }
     }

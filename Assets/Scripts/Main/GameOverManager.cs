@@ -69,27 +69,27 @@ public class GameOverManager : MonoBehaviour
     }
 
     public void SubmitScore()
-{
-    string playerName = nameInputField.text.Trim();
-    
-    // Limit to 8 characters
-    if (playerName.Length > 8)
     {
-        playerName = playerName.Substring(0, 8);
+        string playerName = nameInputField.text.Trim();
+
+        // Limit to 8 characters
+        if (playerName.Length > 8)
+        {
+            playerName = playerName.Substring(0, 8);
+        }
+
+        if (string.IsNullOrEmpty(playerName))
+        {
+            playerName = "Anonymous"; // Default name if empty
+        }
+
+        SaveScore(playerName, finalScore);
+
+        // Hide input and show return button
+        nameInputField.gameObject.SetActive(false);
+        submitScoreButton.gameObject.SetActive(false);
+        returnToTitleButton.gameObject.SetActive(true);
     }
-
-    if (string.IsNullOrEmpty(playerName))
-    {
-        playerName = "Anonymous"; // Default name if empty
-    }
-
-    SaveScore(playerName, finalScore);
-
-    // Hide input and show return button
-    nameInputField.gameObject.SetActive(false);
-    submitScoreButton.gameObject.SetActive(false);
-    returnToTitleButton.gameObject.SetActive(true);
-}
 
     private void SaveScore(string name, int score)
     {
