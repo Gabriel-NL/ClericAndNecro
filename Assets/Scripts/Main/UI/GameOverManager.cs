@@ -12,6 +12,7 @@ public class GameOverManager : MonoBehaviour
     public TMP_InputField nameInputField;
     public Button submitScoreButton;
     public Button returnToTitleButton;
+    public Button playAgainButton; // New button
 
     public float fadeDuration = 2f;
     private int finalScore;
@@ -24,6 +25,7 @@ public class GameOverManager : MonoBehaviour
         finalScoreText.gameObject.SetActive(false);
         submitScoreButton.gameObject.SetActive(false);
         returnToTitleButton.gameObject.SetActive(false);
+        playAgainButton.gameObject.SetActive(false); // Hide play again button
         nameInputField.gameObject.SetActive(false);
     }
 
@@ -85,10 +87,11 @@ public class GameOverManager : MonoBehaviour
 
         SaveScore(playerName, finalScore);
 
-        // Hide input and show return button
+        // Hide input and show return & play again buttons
         nameInputField.gameObject.SetActive(false);
         submitScoreButton.gameObject.SetActive(false);
         returnToTitleButton.gameObject.SetActive(true);
+        playAgainButton.gameObject.SetActive(true); // Show play again button
     }
 
     private void SaveScore(string name, int score)
@@ -103,5 +106,10 @@ public class GameOverManager : MonoBehaviour
     public void ReturnToTitle()
     {
         SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void PlayAgain() // New function
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reloads the current scene
     }
 }

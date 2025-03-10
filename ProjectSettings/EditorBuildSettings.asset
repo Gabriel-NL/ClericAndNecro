@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Pseudo2DMap.unity
-    guid: beac77d706c989b408bc522b90a9a262
-  - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: 72a40cb9e07c0b746971ab7770d3fd87
+  - enabled: 1
+    path: Assets/Scenes/Pseudo2DMap.unity
+    guid: beac77d706c989b408bc522b90a9a262
   - enabled: 1
     path: Assets/Scenes/HighScoreScene.unity
     guid: 0c769aa5de8194941b96370b2d55066d

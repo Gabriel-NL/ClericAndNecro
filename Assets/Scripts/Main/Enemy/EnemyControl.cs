@@ -17,7 +17,7 @@ public class EnemyControl : MonoBehaviour
     public float checkRadius = 10f; // Collision check radius
     public int maxAttempts = 20; // Max spawn attempts
     private Vector3 min_bounds, max_bounds;
-    private int wave = 0;
+    public int wave = 0;
 
     [Header("Tombstone Configs")]
     private List<GameObject> created_tombstones;
