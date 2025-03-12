@@ -18,7 +18,7 @@ public class EnemyData : MonoBehaviour
         {
             Debug.LogWarning("Healing prefab is missing!");
         }
-        GetComponent<NavMeshAgent>().speed = Random.Range(6, 9);
+        GetComponent<NavMeshAgent>().speed = Random.Range(5, 8);
     }
 
     public void DealDamage(int damage)

@@ -1,8 +1,8 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class EnemyControl : MonoBehaviour
 {
@@ -33,6 +33,8 @@ public class EnemyControl : MonoBehaviour
     public GameObject enemy_list_parent;
     public bool canSpawn;
 
+    public TMP_Text waveText;
+
     void Start()
     {
         if (tombstone_prefab == null)
@@ -46,6 +48,7 @@ public class EnemyControl : MonoBehaviour
         StartCoroutine(TombstoneSpawner());
         StartCoroutine(EnemySpawner());
         wave = 1;
+        UpdateWaveUI();
     }
 
     private (Vector3, Vector3) CalculateSpawnBounds()
@@ -118,6 +121,7 @@ public class EnemyControl : MonoBehaviour
         {
             wave += 1;
             tombstone_limit = wave;
+            UpdateWaveUI();
             StartCoroutine(TombstoneSpawner());
         }
     }
@@ -196,5 +200,13 @@ public class EnemyControl : MonoBehaviour
     {
         created_tombstones.Remove(destroyed_obj);
     }
+
+    private void UpdateWaveUI()
+{
+    if (waveText != null)
+    {
+        waveText.text = "Wave: " + wave;
+    }
+}
 
 }
