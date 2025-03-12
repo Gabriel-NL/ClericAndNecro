@@ -25,7 +25,6 @@ public class NavmeshEnemy : MonoBehaviour
         
     }
 
-
     void FixedUpdate()
     {
         navMeshAgent.SetDestination(player.position);
