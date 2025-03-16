@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour
     public Image[] hearts_array;
     
     public float invincibilityDuration = 1.5f; // Duration of invincibility
-    private bool isInvincible = false; // Tracks if the player is invincible
+    public bool isInvincible = false; // Tracks if the player is invincible
     public GameOverManager gameOverManager;
 
     void Start()

@@ -1808,9 +1808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 961288327}
   - component: {fileID: 961288328}
-  - component: {fileID: 961288329}
   - component: {fileID: 961288330}
-  - component: {fileID: 961288331}
   - component: {fileID: 961288332}
   - component: {fileID: 961288333}
   - component: {fileID: 961288334}
@@ -1866,22 +1864,6 @@ MonoBehaviour:
   enemy_list_parent: {fileID: 229795919}
   canSpawn: 1
   waveText: {fileID: 24504534}
---- !u!114 &961288329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961288325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e71102f5a776874b9e4a63d4c9c51d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  dashForce: 50
-  lastDashTime: 0
-  rb: {fileID: 1761695606}
 --- !u!114 &961288330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,23 +1880,6 @@ MonoBehaviour:
   player: {fileID: 1761695610}
   smoothSpeed: 3
   offset: {x: 0, y: 106.5, z: 0}
---- !u!114 &961288331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961288325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57aeef894fbf9ba449f44c261bfa6004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7172555691175124576, guid: c11fd6f9461bcf643a1cfd27ff0689ca, type: 3}
-  firePoint: {fileID: 1761695604}
-  projectileSpeed: 10
-  player: {fileID: 1638319877}
-  fireRate: 0.5
 --- !u!114 &961288332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,11 +3117,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1281876131077895719, guid: 49c3dbe496730ce4ab11985067a80cd1, type: 3}
   m_PrefabInstance: {fileID: 1579822363}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1638319877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1375692257472129818, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-  m_PrefabInstance: {fileID: 1761695603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1641040534
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,18 +3315,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1895700947987162416, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-      propertyPath: m_LocalPosition.x
+    - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
+      propertyPath: isInvincible
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1895700947987162416, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1895700947987162416, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
+      propertyPath: hearts_parent
+      value: 
+      objectReference: {fileID: 629037842}
+    - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
+      propertyPath: gameOverManager
+      value: 
+      objectReference: {fileID: 961288334}
     - target: {fileID: 6395400327984697323, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3410,43 +3370,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1375692257472129818, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1761695618}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
---- !u!4 &1761695604 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7334497918403776967, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-  m_PrefabInstance: {fileID: 1761695603}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1761695606 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7721458138938686765, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
-  m_PrefabInstance: {fileID: 1761695603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1761695610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6395400327984697323, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
   m_PrefabInstance: {fileID: 1761695603}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1761695618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638319877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b4676ff384dfa48a7ec58677c9dd23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  hearts_parent: {fileID: 629037842}
-  hearts_array: []
-  invincibilityDuration: 1.5
-  gameOverManager: {fileID: 961288334}
 --- !u!1001 &1801610909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3539,6 +3469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapV5
       objectReference: {fileID: 0}
+    - target: {fileID: 5447331667604542231, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a5108580b921924ab44475a84a99f82, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

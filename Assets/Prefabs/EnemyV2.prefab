@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 7873239521685547489}
   - component: {fileID: 2626506159217393684}
   - component: {fileID: -5354789156054657239}
-  - component: {fileID: 6280840934277676703}
   m_Layer: 0
   m_Name: EnemyV2
   m_TagString: Enemy
@@ -228,7 +227,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 7
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 70
   m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -280,15 +279,3 @@ MonoBehaviour:
   probability: 5
   pointsWorth: 10
   healingItemPrefab: {fileID: 6174147035106072592, guid: 62bcd9a2530dad644be09f4396036ea2, type: 3}
---- !u!114 &6280840934277676703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8533853791134993277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d22bc6d31ad3c4f931c1b19038ec20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.AI;
 
 public class EnemyControl : MonoBehaviour
 {
@@ -126,7 +127,7 @@ public class EnemyControl : MonoBehaviour
         }
     }
 
-        private IEnumerator EnemySpawner()
+    private IEnumerator EnemySpawner()
     {
 
         while (canSpawn)
@@ -174,9 +175,9 @@ public class EnemyControl : MonoBehaviour
 
                 if (isClear)
                 {
+                    
                     // Instantiate the enemy and set as child of the tombstone (or other parent)
                     enemy = Instantiate(enemy_prefab, spawnPos, Quaternion.identity);
-                    //enemy.transform.SetParent(tombstoneObj.transform, worldPositionStays: true);
                     
                     enemies_generated.Add(enemy);
                     enemy.transform.SetParent(enemy_list_parent.transform, true);
@@ -198,15 +199,15 @@ public class EnemyControl : MonoBehaviour
 
     public void OnEnemyDestroy(GameObject destroyed_obj)
     {
-        created_tombstones.Remove(destroyed_obj);
+        enemies_generated.Remove(destroyed_obj);
     }
 
     private void UpdateWaveUI()
-{
-    if (waveText != null)
     {
-        waveText.text = "Wave: " + wave;
+        if (waveText != null)
+        {
+            waveText.text = "Wave: " + wave;
+        }
     }
-}
 
 }
