@@ -1858,8 +1858,9 @@ MonoBehaviour:
   maxAttempts: 20
   wave: 0
   tombstone_internal_clock: 1.5
-  enemy_prefab: {fileID: 8533853791134993277, guid: 669b2ca2f27fdb24490b206b363b8854, type: 3}
+  enemy_prefab: {fileID: 9967532716601102, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
   enemy_internal_clock: 1
+  max_number_enemies: 5
   enemy_spawn_radius: 1
   enemy_list_parent: {fileID: 229795919}
   canSpawn: 1
