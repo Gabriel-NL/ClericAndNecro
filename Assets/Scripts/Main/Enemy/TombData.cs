@@ -12,7 +12,7 @@ public class TombData : MonoBehaviour
     
     public Double GetExtraHP(){
         double output=extra_hp;
-        extra_hp+=0.2;
+        extra_hp+=0.1;
         return output;
     }
     public void DealDamage(int damage)
