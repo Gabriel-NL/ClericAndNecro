@@ -146,7 +146,7 @@ public class EnemyControl : MonoBehaviour
         float randomX, randomZ;
         bool isClear;
         GameObject enemy;
-        double extra_hp = 0;
+        double extra_speed = 0;
         Bounds bounds = tombstone_prefab.GetComponent<Renderer>().bounds;
         float checkRadius = Mathf.Max(bounds.extents.x, bounds.extents.z);
 
@@ -182,8 +182,8 @@ public class EnemyControl : MonoBehaviour
                     
                     enemies_generated.Add(enemy);
                     enemy.transform.SetParent(enemy_list_parent.transform, true);
-                    extra_hp = tombstoneObj.GetComponent<TombData>().GetExtraHP();
-                    enemy.GetComponent<EnemyData>().AddExtraHP(extra_hp);
+                    extra_speed = tombstoneObj.GetComponent<TombData>().GetExtraSpeed();
+                    enemy.GetComponent<EnemyData>().AddExtraSpeed((float)extra_speed);
                     // Exit the inner loop once an enemy has been successfully spawned
                     break;
                 }

@@ -7,13 +7,17 @@ public class EnemyData : MonoBehaviour
 {
     [Range(0, 100)] public int probability = 5;
     private int prob_result;
-    private double health_points = 4;
+    private double health_points = 3;
     private NavMeshAgent navMeshAgent;
     private Transform player;
     public int pointsWorth = 10;
     public GameObject healingItemPrefab; // Assign a HealingItem prefab in the Inspector
     private bool facingRight = true;
 
+    void Awake()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
     void Start()
     {
         if (healingItemPrefab == null)
@@ -23,16 +27,14 @@ public class EnemyData : MonoBehaviour
         // Find the player by tag and get the player's transform
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Get the NavMeshAgent component on this enemy
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = Random.Range(5, 8);
-
         if (player == null)
         {
             Debug.LogError("Player not found!");
             return;
         }
     }
+
+
 
     public void DealDamage(int damage)
     {
@@ -54,9 +56,9 @@ public class EnemyData : MonoBehaviour
         }
     }
 
-    public void AddExtraHP(double extra_hp)
+    public void AddExtraSpeed(float extra_speed)
     {
-        health_points += extra_hp;
+        navMeshAgent.speed += (float)extra_speed;
     }
 
     void FixedUpdate()

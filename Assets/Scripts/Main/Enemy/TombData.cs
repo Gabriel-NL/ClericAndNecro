@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class TombData : MonoBehaviour
 {
-    private double extra_hp=0;
+    private double extra_speed=0;
     private int tombstone_hp=5;
     private int pointsWorth = 100;
     // Start is called before the first frame update
     
-    public Double GetExtraHP(){
-        double output=extra_hp;
-        extra_hp+=0.1;
+    public double GetExtraSpeed(){
+        double output=extra_speed;
+        extra_speed+=0.1;
         return output;
     }
     public void DealDamage(int damage)
