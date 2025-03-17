@@ -12,8 +12,6 @@ public class NavmeshEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Find the player by tag and get the player's transform
-        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         // Get the NavMeshAgent component on this enemy
         navMeshAgent = GetComponent<NavMeshAgent>();
