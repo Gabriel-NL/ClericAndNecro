@@ -29,7 +29,7 @@ public class EnemyControl : MonoBehaviour
     public GameObject enemy_prefab; // The tombstone prefab to spawn
     private List<GameObject> enemies_generated = new List<GameObject>();
     public float enemy_internal_clock = 1.0f;
-    private int max_number_enemies = 20;
+    public int max_number_enemies = 5;
     public float enemy_spawn_radius = 4f;
     public GameObject enemy_list_parent;
     public bool canSpawn;
@@ -122,6 +122,7 @@ public class EnemyControl : MonoBehaviour
         {
             wave += 1;
             tombstone_limit = wave;
+            max_number_enemies +=1;
             UpdateWaveUI();
             StartCoroutine(TombstoneSpawner());
         }

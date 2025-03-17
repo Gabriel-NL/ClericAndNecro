@@ -12,6 +12,7 @@ public class EnemyData : MonoBehaviour
     private Transform player;
     public int pointsWorth = 10;
     public GameObject healingItemPrefab; // Assign a HealingItem prefab in the Inspector
+    private bool facingRight = true;
 
     void Start()
     {
@@ -57,12 +58,29 @@ public class EnemyData : MonoBehaviour
     {
         health_points += extra_hp;
     }
+
     void FixedUpdate()
     {
         if (!navMeshAgent.pathPending && Vector3.Distance(navMeshAgent.destination, player.position) > 0.1f)
         {
             navMeshAgent.SetDestination(player.position);
         }
+        
+        FlipTowardsPlayer();
     }
 
+    void FlipTowardsPlayer()
+    {
+        if (player == null) return;
+
+        if ((player.position.x > transform.position.x && facingRight) ||
+            (player.position.x < transform.position.x && !facingRight))
+        {
+            facingRight = !facingRight;
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
+        }
+    }
 }
+
