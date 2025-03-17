@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "D:\\UnityRepo\\ClericAndNecro\\Assets\\Textures\\Gimp\\Necro",
+  "images": [
+    {
+      "name": "Necro_1.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_1.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_2.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_2.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_3.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_3.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_4.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_4.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_5.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_5.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_6.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_6.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_7.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_7.png",
+      "folder": ""
+    },
+    {
+      "name": "Necro_8.png",
+      "path": "D:/UnityRepo/ClericAndNecro/Assets/Textures/Gimp/Necro/Necro_8.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "texture",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "D:\\UnityRepo\\ClericAndNecro\\Assets\\Textures\\Gimp\\Necro",
+    "width": 3072,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 64,
+    "extrude": 0,
+    "allowRotation": false,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}
