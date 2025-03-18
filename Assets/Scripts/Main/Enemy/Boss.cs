@@ -37,20 +37,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-
-        if (distanceToPlayer < minimum_distance_from_player)
-        {
-            RetreatFromPlayer();
-            return;
-        }
-
-        if (distanceToPlayer > maximum_distance_from_player)
-        {
-            navMeshAgent.SetDestination(player.transform.position);
-            return;
-        }
     }
 
     void RetreatFromPlayer()
