@@ -8,10 +8,12 @@ public class HealthSystem : MonoBehaviour
     private int currentHealth;
     public Transform hearts_parent;
     public Image[] hearts_array;
-    
+
     public float invincibilityDuration = 1.5f; // Duration of invincibility
     public bool isInvincible = false; // Tracks if the player is invincible
     public GameOverManager gameOverManager;
+
+    private SpriteRenderer[] all_player_sprites;
 
     void Start()
     {
@@ -23,10 +25,11 @@ public class HealthSystem : MonoBehaviour
             hearts_array[i] = hearts_parent.GetChild(i).GetChild(0).GetComponent<Image>();
         }
         currentHealth = maxHealth;
+        all_player_sprites = GetComponentsInChildren<SpriteRenderer>();
         UpdateHealthUI();
     }
 
-    private void OnCollisionEnter(Collision collided_obj) 
+    private void OnCollisionEnter(Collision collided_obj)
     {
         if (collided_obj.collider.CompareTag("Enemy"))
         {
@@ -37,10 +40,10 @@ public class HealthSystem : MonoBehaviour
     void TakeDamage(int damage)
     {
         if (isInvincible) return; // Ignore damage if currently invincible
-        
+
         currentHealth -= damage;
         UpdateHealthUI();
-        
+
         if (currentHealth <= 0)
         {
             Die();
@@ -55,22 +58,22 @@ public class HealthSystem : MonoBehaviour
     {
         isInvincible = true;
         float elapsedTime = 0f;
-        
+
         // Optional: Add a blinking effect to show invincibility
-        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
         while (elapsedTime < invincibilityDuration)
         {
-            if (spriteRenderer != null)
+            foreach (var sprite in all_player_sprites)
             {
-                spriteRenderer.enabled = !spriteRenderer.enabled; // Toggle visibility
+                sprite.enabled = !sprite.enabled; // Toggle visibility
             }
+
             yield return new WaitForSeconds(0.2f); // Blink speed
             elapsedTime += 0.2f;
         }
-        
-        if (spriteRenderer != null)
+        foreach (var sprite in all_player_sprites)
         {
-            spriteRenderer.enabled = true; // Ensure visibility after invincibility ends
+            sprite.enabled = true;// Toggle visibility
         }
         isInvincible = false;
     }
@@ -91,8 +94,8 @@ public class HealthSystem : MonoBehaviour
     }
 
     public void Heal(int amount)
-{
-    currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // Prevent overheal
-    UpdateHealthUI();
-}
+    {
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // Prevent overheal
+        UpdateHealthUI();
+    }
 }

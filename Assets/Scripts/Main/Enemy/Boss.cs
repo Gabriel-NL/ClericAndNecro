@@ -7,10 +7,12 @@ public class Boss : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform player;
-    public float retreatDistance = 5f; // Distance at which the enemy starts retreating
+
+    public float minimum_distance_from_player = 5, maximum_distance_from_player;
     public float retreatSpeed = 3.5f;
-    private int boss_hp=20;
+    private int boss_hp = 20;
     private NavMeshAgent navMeshAgent;
+    public float distanceToPlayer;
 
     void Awake()
     {
@@ -18,36 +20,44 @@ public class Boss : MonoBehaviour
     }
     void Start()
     {
-         if (player == null)
-    {
-        GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
-        if (foundPlayer != null)
+        if (player == null)
         {
-            player = foundPlayer.transform;
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+            else
+            {
+                Debug.LogError("Player not found! Make sure the player has the correct tag.");
+            }
         }
-        else
-        {
-            Debug.LogError("Player not found! Make sure the player has the correct tag.");
-        }
-    }
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        
-        if (distanceToPlayer < retreatDistance)
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+
+        if (distanceToPlayer < minimum_distance_from_player)
         {
             RetreatFromPlayer();
+            return;
+        }
+
+        if (distanceToPlayer > maximum_distance_from_player)
+        {
+            navMeshAgent.SetDestination(player.transform.position);
+            return;
         }
     }
-    
+
     void RetreatFromPlayer()
     {
         Vector3 directionAway = (transform.position - player.position).normalized;
-        Vector3 retreatPosition = transform.position + directionAway * retreatDistance;
-        
+        Vector3 retreatPosition = transform.position + directionAway * minimum_distance_from_player;
+
         NavMeshHit hit;
         if (NavMesh.SamplePosition(retreatPosition, out hit, 1.0f, NavMesh.AllAreas))
         {

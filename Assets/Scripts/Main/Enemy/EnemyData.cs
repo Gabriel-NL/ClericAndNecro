@@ -56,7 +56,7 @@ public class EnemyData : MonoBehaviour
         }
     }
 
-    public void AddExtraSpeed(float extra_speed)
+    public void AddExtraSpeed(double extra_speed)
     {
         navMeshAgent.speed += (float)extra_speed;
     }

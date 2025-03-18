@@ -19,6 +19,7 @@ public class EnemyControl : MonoBehaviour
     public int maxAttempts = 20; // Max spawn attempts
     private Vector3 min_bounds, max_bounds;
     public int wave = 0;
+    public int last_wave = 10;
 
     [Header("Tombstone Configs")]
     private List<GameObject> created_tombstones;
@@ -35,9 +36,11 @@ public class EnemyControl : MonoBehaviour
     public bool canSpawn;
 
     public TMP_Text waveText;
+    public TMP_Text tombstone_count;
 
     void Start()
     {
+
         if (tombstone_prefab == null)
         {
             throw new System.ArgumentNullException(nameof(tombstone_prefab), "Tombstone prefab is null!");
@@ -69,6 +72,7 @@ public class EnemyControl : MonoBehaviour
         while (created_tombstones.Count < tombstone_limit)
         {
             created_tombstones.Add(SpawnTombstone(min_bounds, max_bounds));
+            UpdateTombstoneCount();
 
             yield return new WaitForSeconds(tombstone_internal_clock);
         }
@@ -104,6 +108,7 @@ public class EnemyControl : MonoBehaviour
             {
                 // Instantiate and set as child of spawnParent
                 tombstone = Instantiate(tombstone_prefab, spawnPos, tombstone_prefab.transform.rotation);
+                
                 tombstone.transform.SetParent(spawnParent, worldPositionStays: true);
 
                 return tombstone;
@@ -118,14 +123,17 @@ public class EnemyControl : MonoBehaviour
     {
 
         created_tombstones.Remove(destroyed_obj);
-        if (created_tombstones.Count <= 0)
+        UpdateTombstoneCount();
+        if (created_tombstones.Count <= 0 && wave != last_wave)
         {
             wave += 1;
             tombstone_limit = wave;
-            max_number_enemies +=1;
+            max_number_enemies += 1;
             UpdateWaveUI();
             StartCoroutine(TombstoneSpawner());
         }
+
+        Debug.Log("Victory");
     }
 
     private IEnumerator EnemySpawner()
@@ -148,7 +156,6 @@ public class EnemyControl : MonoBehaviour
         GameObject enemy;
         double extra_speed = 0;
         Bounds bounds = tombstone_prefab.GetComponent<Renderer>().bounds;
-        float checkRadius = Mathf.Max(bounds.extents.x, bounds.extents.z);
 
         foreach (GameObject tombstoneObj in created_tombstones)
         {
@@ -176,14 +183,14 @@ public class EnemyControl : MonoBehaviour
 
                 if (isClear)
                 {
-                    
+
                     // Instantiate the enemy and set as child of the tombstone (or other parent)
                     enemy = Instantiate(enemy_prefab, spawnPos, Quaternion.identity);
-                    
+
                     enemies_generated.Add(enemy);
                     enemy.transform.SetParent(enemy_list_parent.transform, true);
                     extra_speed = tombstoneObj.GetComponent<TombData>().GetExtraSpeed();
-                    enemy.GetComponent<EnemyData>().AddExtraSpeed((float)extra_speed);
+                    enemy.GetComponent<EnemyData>().AddExtraSpeed(extra_speed);
                     // Exit the inner loop once an enemy has been successfully spawned
                     break;
                 }
@@ -192,10 +199,7 @@ public class EnemyControl : MonoBehaviour
                     continue;
                 }
             }
-
-
         }
-
     }
 
     public void OnEnemyDestroy(GameObject destroyed_obj)
@@ -207,8 +211,17 @@ public class EnemyControl : MonoBehaviour
     {
         if (waveText != null)
         {
-            waveText.text = "Wave: " + wave;
+            waveText.text = "Current wave: " + wave;
         }
+    }
+
+    public void UpdateTombstoneCount()
+    {
+        tombstone_count.text = "Tombstones Remaining: " + created_tombstones.Count();
+    }
+    public void SpawnBossMonster()
+    {
+
     }
 
 }
