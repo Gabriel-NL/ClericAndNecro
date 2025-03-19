@@ -68,7 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a604ad1c426bfd43bcde3e6eb577022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retreatDistance: 20
   retreatSpeed: 10
 --- !u!195 &-1461115564344865098
 NavMeshAgent:
@@ -118,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 2716933851946637157}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

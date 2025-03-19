@@ -23,7 +23,6 @@ public class TombData : MonoBehaviour
     {
         tombstone_position = gameObject.transform.position;
         bounds = gameObject.GetComponent<Renderer>().bounds;
-
     }
     public double GetExtraSpeed()
     {
@@ -39,7 +38,7 @@ public class TombData : MonoBehaviour
         }
         else
         {
-            FindAnyObjectByType<EnemyControl>().OnTombstoneDestroy(this);
+            FindAnyObjectByType<EnemyControl>().OnTombstoneDestroy(transform);
             Destroy(gameObject);
 
             // Add score when enemy is killed
@@ -68,7 +67,6 @@ public class TombData : MonoBehaviour
             isClear = Physics.OverlapSphere(spawnPos, enemy_spawn_radius, obstacleLayer).Length == 0;
             if (isClear)
             {
-
                 // Instantiate the enemy and set as child of the tombstone (or other parent)
                 enemy = Instantiate(enemy_prefab, spawnPos, Quaternion.identity);
                 enemy.GetComponent<EnemyData>().AddExtraSpeed(GetExtraSpeed());

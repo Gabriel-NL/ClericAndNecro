@@ -2030,7 +2030,7 @@ MonoBehaviour:
   margin: 10
   checkRadius: 10
   wave: 0
-  last_wave: 4
+  last_wave: 2
   tombstone_internal_clock: 1.5
   enemy_prefab: {fileID: 8533853791134993277, guid: 669b2ca2f27fdb24490b206b363b8854, type: 3}
   enemy_internal_clock: 1
@@ -2039,7 +2039,7 @@ MonoBehaviour:
   canSpawn: 1
   min_bounds: {x: 0, y: 0, z: 0}
   max_bounds: {x: 0, y: 0, z: 0}
-  boss: {fileID: 0}
+  boss: {fileID: 8815973810723786133, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
 --- !u!114 &961288330
 MonoBehaviour:
   m_ObjectHideFlags: 0

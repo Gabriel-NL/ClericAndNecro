@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +8,7 @@ public class Boss : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform player;
-    private Transform [] active_tombstones;
+    private Transform[] active_tombstones;
     private Transform current_tomb;
 
     public float retreatSpeed = 3.5f;
@@ -39,21 +40,31 @@ public class Boss : MonoBehaviour
 
 
 
-    public void RandomNewTombstone(){
-        Transform[] all_tombstones = FindFirstObjectByType<EnemyControl>().GetTombstoneTransforms();
-        if (all_tombstones.Length>0)
+    public void RandomNewTombstone()
+    {
+        List<Transform> all_tombstones = FindFirstObjectByType<EnemyControl>().GetTombstoneTransforms().ToList();
+
+        if (all_tombstones.Count > 1)
         {
-        int random_index=Random.Range(0,all_tombstones.Length);
-        current_tomb=all_tombstones[random_index];
-        transform.SetParent(current_tomb);
-        gameObject.transform.localPosition = Vector3.zero;
+            int random_index = Random.Range(0, all_tombstones.Count);
+            current_tomb = all_tombstones[random_index];
+            transform.SetParent(current_tomb);
+            gameObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            //Remove parent
+            transform.SetParent(null, true);
+            Debug.Log("Victory");
         }
     }
 
-    public void SetPosition(Vector3 new_pos){
+    public void SetPosition(Vector3 new_pos)
+    {
         gameObject.transform.localPosition = new_pos;
     }
-    public Transform GetCurrentTomb(){
+    public Transform GetCurrentTomb()
+    {
         return current_tomb;
     }
 
