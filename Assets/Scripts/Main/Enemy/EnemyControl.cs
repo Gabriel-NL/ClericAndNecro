@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
 using Unity.VisualScripting;
+using System;
+using Random = UnityEngine.Random;
 
 public class EnemyControl : MonoBehaviour
 {
@@ -15,18 +17,18 @@ public class EnemyControl : MonoBehaviour
     public LayerMask obstacleLayer; // Layer for collision checking
     public TMP_Text waveText;
     public TMP_Text tombstone_count;
-    public GameObject boss_monster;
+    public GameObject boss_monster_prefab;
 
     [Header("MapConfigs")]
     public float margin; // Margin from collider edges
     public float checkRadius = 10f; // Collision check radius
-    
+
 
     public int wave = 0;
-    public int last_wave = 10;
+    public int last_wave = 5;
 
     [Header("Tombstone Configs")]
-    private List<TombData> generated_tombstones=new List<TombData>();
+    private List<TombData> generated_tombstones = new List<TombData>();
     private int tombstone_limit = 1;
     public float tombstone_internal_clock = 2f;
 
@@ -41,13 +43,17 @@ public class EnemyControl : MonoBehaviour
     //ReadOnly Variables
     [SerializeField]
     private Vector3 min_bounds, max_bounds;
+    [SerializeField] private Boss boss;
+    private Action<TombData> on_tombstone_destroy_function;
+
 
     void Start()
     {
         if (tombstone_prefab == null)
         {
-            throw new System.ArgumentNullException(nameof(tombstone_prefab), "Tombstone prefab is null!");
+            throw new ArgumentNullException(nameof(tombstone_prefab), "Tombstone prefab is null!");
         }
+        on_tombstone_destroy_function = DefaultTombstoneDestroyBehaviour;
 
         (min_bounds, max_bounds) = CalculateSpawnBounds();
         StartCoroutine(TombstoneSpawner());
@@ -72,14 +78,14 @@ public class EnemyControl : MonoBehaviour
         TombData tombstone;
         while (generated_tombstones.Count < tombstone_limit)
         {
-            tombstone=SpawnTombstone();
-            if (tombstone!=null)
+            tombstone = SpawnTombstone();
+            if (tombstone != null)
             {
                 generated_tombstones.Add(tombstone);
                 UpdateTombstoneCount();
             }
-            
-            
+
+
 
             yield return new WaitForSeconds(tombstone_internal_clock);
         }
@@ -129,47 +135,72 @@ public class EnemyControl : MonoBehaviour
 
     public void OnTombstoneDestroy(TombData destroyed_obj)
     {
+        on_tombstone_destroy_function.Invoke(destroyed_obj);
 
-        generated_tombstones.Remove(destroyed_obj);
-        UpdateTombstoneCount();
-        if (generated_tombstones.Count <= 0 && wave != last_wave)
-        {
-            wave += 1;
-            tombstone_limit = wave;
-            max_number_enemies += 1;
-            UpdateWaveUI();
-            StartCoroutine(TombstoneSpawner());
-        }
-        if (wave==last_wave)
-        {
-            SpawnBossMonster();
-        }
 
 
         Debug.Log("Victory");
     }
 
+    public void DefaultTombstoneDestroyBehaviour(TombData destroyed_obj)
+    {
+
+        generated_tombstones.Remove(destroyed_obj);
+        UpdateTombstoneCount();
+        if (generated_tombstones.Count <= 0 )
+        {
+            wave += 1;
+            tombstone_limit = wave*2;
+            max_number_enemies += 2;
+            UpdateWaveUI();
+            StartCoroutine(TombstoneSpawner());
+        }
+        if (wave == last_wave)
+        {
+            SpawnBossMonster();
+        }
+    }
+
+    public void BossTombstoneDestroyBehaviour(TombData destroyed_obj)
+    {
+        generated_tombstones.Remove(destroyed_obj);
+        UpdateTombstoneCount();
+        bool boss_have_to_move = (generated_tombstones.Count > 1) && (boss.GetCurrentTomb() == destroyed_obj);
+        if (boss_have_to_move)
+        {
+            boss.RandomNewTombstone();
+        }
+
+
+    }
+
     private IEnumerator EnemySpawner()
     {
-        int randomIndex;
+        yield return new WaitForSeconds(tombstone_internal_clock);
+
         GameObject new_enemy;
         while (enemies_generated.Count != max_number_enemies)
         {
-
-            if (enemies_generated.Count < max_number_enemies)
+            foreach (var tomb in generated_tombstones)
             {
-                randomIndex = Random.Range(0, generated_tombstones.Count);
-                new_enemy = generated_tombstones[randomIndex].SpawnEnemy(enemy_prefab);
-                if (new_enemy != null)
+                if (enemies_generated.Count < max_number_enemies)
                 {
-                    enemies_generated.Add(new_enemy);
-                    new_enemy.transform.SetParent(enemy_list_parent.transform, true);
-                }
-                else
+                    new_enemy = tomb.SpawnEnemy(enemy_prefab);
+                    if (new_enemy != null)
+                    {
+                        enemies_generated.Add(new_enemy);
+                        new_enemy.transform.SetParent(enemy_list_parent.transform, true);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }else
                 {
-                    continue;
+                    break;
                 }
             }
+    
             yield return new WaitForSeconds(5);
         }
     }
@@ -193,7 +224,20 @@ public class EnemyControl : MonoBehaviour
     }
     public void SpawnBossMonster()
     {
-        Instantiate(boss_monster, spawnParent);
+
+        boss = Instantiate(boss_monster_prefab, spawnParent).GetComponent<Boss>();
+        boss.RandomNewTombstone();
+        int randomIndex = Random.Range(0, generated_tombstones.Count);
+        on_tombstone_destroy_function = BossTombstoneDestroyBehaviour;
+    }
+    public Transform[] GetTombstoneTransforms()
+    {
+        Transform[] positions = new Transform[generated_tombstones.Count];
+        for (int i = 0; i < positions.Length; i++)
+        {
+            positions[i] = generated_tombstones[i].transform;
+        }
+        return positions;
     }
 
 }

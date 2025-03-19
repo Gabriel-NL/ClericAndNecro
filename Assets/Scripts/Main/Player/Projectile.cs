@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
             target_hit.gameObject.GetComponent<TombData>().DealDamage(damage);
             break;
             case "MapBorder":
+            Debug.Log("Hit wall");
             break;
 
             default:
@@ -27,7 +28,7 @@ public class Projectile : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    void FixedUpdate()
+    void Update()
     {
         // Move the projectile forward in its local direction
         transform.Translate(Vector2.left * speed * Time.deltaTime);

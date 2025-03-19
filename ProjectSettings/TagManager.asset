@@ -7,6 +7,7 @@ TagManager:
   - MapBorder
   - Enemy
   - Tomb
+  - EnemyList
   layers:
   - Default
   - TransparentFX

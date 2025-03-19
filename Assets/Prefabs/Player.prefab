@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4710698843414114536}
   - component: {fileID: 1549801475854481833}
   - component: {fileID: 4893185261950679663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ MonoBehaviour:
   hearts_parent: {fileID: 0}
   hearts_array: []
   invincibilityDuration: 1.5
-  isInvincible: 1
+  isInvincible: 0
   gameOverManager: {fileID: 0}
 --- !u!114 &1549801475854481833
 MonoBehaviour:

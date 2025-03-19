@@ -20,6 +20,7 @@ public class EnemyData : MonoBehaviour
     }
     void Start()
     {
+
         if (healingItemPrefab == null)
         {
             Debug.LogWarning("Healing prefab is missing!");

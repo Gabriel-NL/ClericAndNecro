@@ -2026,7 +2026,7 @@ MonoBehaviour:
     m_Bits: 128
   waveText: {fileID: 24504534}
   tombstone_count: {fileID: 476899737}
-  boss_monster: {fileID: 9967532716601102, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
+  boss_monster_prefab: {fileID: 9967532716601102, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
   margin: 10
   checkRadius: 10
   wave: 0
@@ -2039,6 +2039,7 @@ MonoBehaviour:
   canSpawn: 1
   min_bounds: {x: 0, y: 0, z: 0}
   max_bounds: {x: 0, y: 0, z: 0}
+  boss: {fileID: 0}
 --- !u!114 &961288330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,6 +2552,60 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1281876131077895719, guid: 49c3dbe496730ce4ab11985067a80cd1, type: 3}
   m_PrefabInstance: {fileID: 1275198760}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1350002304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
+  m_PrefabInstance: {fileID: 1801610909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1350002306
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350002304}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!54 &1350002307
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350002304}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1354068921
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,7 +3547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
       propertyPath: isInvincible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
       propertyPath: hearts_parent
@@ -3652,6 +3707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapV5
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5447331667604542231, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3660,6 +3719,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350002306}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350002307}
     - targetCorrespondingSourceObject: {fileID: -6500414037139605827, guid: 41356a59633c17647a2a4acbc8c31456, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1801610912}
@@ -3704,7 +3769,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!64 &1801610912
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3721,7 +3786,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0

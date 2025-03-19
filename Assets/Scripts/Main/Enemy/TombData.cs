@@ -12,8 +12,8 @@ public class TombData : MonoBehaviour
     [Header("Editable Variables")]
     public int tombstone_hp = 5;
     public int points_worth = 100;
-    public int spawn_attempts = 5;
-    public float enemy_spawn_radius = 1f;
+    public int spawn_attempts = 20;
+    private float enemy_spawn_radius = 3;
 
     //Invisible variables
     private Vector3 tombstone_position;
@@ -28,7 +28,7 @@ public class TombData : MonoBehaviour
     public double GetExtraSpeed()
     {
         double output = extra_speed;
-        extra_speed += 0.2;
+        extra_speed += 0.1;
         return output;
     }
     public void DealDamage(int damage)
