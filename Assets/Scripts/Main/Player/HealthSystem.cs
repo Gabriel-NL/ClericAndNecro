@@ -7,7 +7,7 @@ public class HealthSystem : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
     public Transform hearts_parent;
-    public Image[] hearts_array;
+    private Image[] hearts_array;
 
     public float invincibilityDuration = 1.5f; // Duration of invincibility
     public bool isInvincible = false; // Tracks if the player is invincible
