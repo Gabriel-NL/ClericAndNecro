@@ -2024,22 +2024,18 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  waveText: {fileID: 24504534}
-  tombstone_count: {fileID: 476899737}
-  boss_monster_prefab: {fileID: 9967532716601102, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
   margin: 10
   checkRadius: 10
+  maxAttempts: 20
   wave: 0
-  last_wave: 5
   tombstone_internal_clock: 1.5
   enemy_prefab: {fileID: 8533853791134993277, guid: 669b2ca2f27fdb24490b206b363b8854, type: 3}
   enemy_internal_clock: 1
   max_number_enemies: 5
+  enemy_spawn_radius: 4
   enemy_list_parent: {fileID: 229795919}
   canSpawn: 1
-  min_bounds: {x: 0, y: 0, z: 0}
-  max_bounds: {x: 0, y: 0, z: 0}
-  boss: {fileID: 8815973810723786133, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
+  waveText: {fileID: 24504534}
 --- !u!114 &961288330
 MonoBehaviour:
   m_ObjectHideFlags: 0
