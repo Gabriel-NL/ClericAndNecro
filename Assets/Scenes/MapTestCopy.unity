@@ -2030,7 +2030,7 @@ MonoBehaviour:
   margin: 10
   checkRadius: 10
   wave: 0
-  last_wave: 2
+  last_wave: 5
   tombstone_internal_clock: 1.5
   enemy_prefab: {fileID: 8533853791134993277, guid: 669b2ca2f27fdb24490b206b363b8854, type: 3}
   enemy_internal_clock: 1
@@ -3547,7 +3547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
       propertyPath: isInvincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4710698843414114536, guid: f91b8dce9353a8c45b25a94f2a61d29e, type: 3}
       propertyPath: hearts_parent

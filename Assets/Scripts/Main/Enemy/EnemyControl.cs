@@ -164,13 +164,12 @@ public class EnemyControl : MonoBehaviour
 
     public void BossTombstoneDestroyBehaviour(Transform destroyed_obj)
     {
-        bool boss_have_to_move = (generated_tombstones.Count > 0) && destroyed_obj.GetComponentInChildren<Boss>() != null;
+        bool boss_have_to_move = destroyed_obj.GetComponentInChildren<Boss>() != null;
 
         if (boss_have_to_move)
         {
             boss.RandomNewTombstone();
         }
-
         
     }
 
@@ -239,5 +238,13 @@ public class EnemyControl : MonoBehaviour
         }
         return positions;
     }
-
+    public void KillAllEnemies(){
+        GameObject[] enemy_cleared= enemies_generated.ToArray();
+        for (int i = 0; i < enemy_cleared.Length; i++)
+        {
+            enemy_cleared[i].GetComponent<EnemyData>().TriggerDeath();
+        }
+        enemies_generated.Clear();
+        
+    }
 }

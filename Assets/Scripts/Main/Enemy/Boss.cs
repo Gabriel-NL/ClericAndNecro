@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform player;
-    private Transform[] active_tombstones;
+    private EnemyControl enemy_control_script;
     private Transform current_tomb;
 
     public float retreatSpeed = 3.5f;
@@ -37,14 +37,12 @@ public class Boss : MonoBehaviour
         }
     }
 
-
-
-
     public void RandomNewTombstone()
     {
-        List<Transform> all_tombstones = FindFirstObjectByType<EnemyControl>().GetTombstoneTransforms().ToList();
+        enemy_control_script=FindFirstObjectByType<EnemyControl>();
+        List<Transform> all_tombstones = enemy_control_script.GetTombstoneTransforms().ToList();
 
-        if (all_tombstones.Count > 1)
+        if (all_tombstones.Count > 0)
         {
             int random_index = Random.Range(0, all_tombstones.Count);
             current_tomb = all_tombstones[random_index];
@@ -56,6 +54,7 @@ public class Boss : MonoBehaviour
             //Remove parent
             transform.SetParent(null, true);
             Debug.Log("Victory");
+            enemy_control_script.KillAllEnemies();
         }
     }
 
