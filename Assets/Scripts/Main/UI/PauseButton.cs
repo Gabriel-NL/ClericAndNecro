@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI; // Assign the PauseMenu panel in Inspector
+    public GameObject howToPlayPanel; // Reference to the panel
     private bool isPaused = false;
 
     void Update()
@@ -37,5 +38,11 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f; // Ensure time resumes when quitting
         SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void ActivateTutorial()
+    {
+        pauseMenuUI.SetActive(false);
+        howToPlayPanel.SetActive(true);
     }
 }
