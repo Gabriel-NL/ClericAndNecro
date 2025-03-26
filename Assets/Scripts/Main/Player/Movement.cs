@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     private Vector3 movement; // Store the player's movement input
     [SerializeField]private float lastDashTime=0f;
     public Rigidbody rb; // Reference to the Rigidbody2D component
+    public Animator anim;
 
     void Start()
     {
@@ -31,6 +32,15 @@ public class Movement : MonoBehaviour
         {
             movement.Normalize();
         }
+        if (movement!= Vector3.zero)
+        {
+             anim.SetBool("walk", true);
+        }else
+        {
+            anim.SetBool("walk",false);
+        }
+        
+        
     }
 
     void HandleDash()
