@@ -19,4 +19,9 @@ public class TitleScreenManager : MonoBehaviour
     {
         SceneManager.LoadScene("HighScoreScene");
     }
+
+    public void EnterCredits()
+    {
+        SceneManager.LoadScene("CreditsScene");
+    }
 }
