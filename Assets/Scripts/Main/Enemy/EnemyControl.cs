@@ -188,7 +188,7 @@ public class EnemyControl : MonoBehaviour
                     if (new_enemy != null)
                     {
                         enemies_generated.Add(new_enemy);
-                        new_enemy.transform.SetParent(enemy_list_parent.transform, true);
+                        //new_enemy.transform.SetParent(enemy_list_parent.transform, true);
                     }
                     else
                     {

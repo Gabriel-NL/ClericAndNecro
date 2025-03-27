@@ -62,13 +62,13 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMovement();
-        HandleDash();
-        rb.velocity = movement * moveSpeed;
+        
     }
 
     void Update()
     {
+        HandleMovement();
         HandleDash();
+        rb.velocity = movement * moveSpeed;
     }
 }

@@ -35,7 +35,6 @@ public class PlayerShootingV2 : MonoBehaviour
 
     private void HandleItemRotation()
     {
-
         // Get the mouse position in screen space
         mousePosition = Input.mousePosition;
 
@@ -74,10 +73,8 @@ public class PlayerShootingV2 : MonoBehaviour
         distanceVector.y = Mathf.Clamp(distanceVector.y, -7f, 7f);
         distanceVector.z = Mathf.Clamp(distanceVector.z, -7f, 7f);
 
-
-
-         eyeX = Mathf.Lerp(-0.1f, 0.1f, (distanceVector.x + 7f) / 14f);
-         eyeY = Mathf.Lerp(0.15f, 0.25f, (distanceVector.z + 7f) / 14f);
+        eyeX = Mathf.Lerp(-0.1f, 0.1f, (distanceVector.x + 7f) / 14f);
+        eyeY = Mathf.Lerp(0.15f, 0.25f, (distanceVector.z + 7f) / 14f);
 
         // Apply movement
         eyes.localPosition = new Vector3(eyeX, eyeY, eyes.localPosition.z);
@@ -85,7 +82,6 @@ public class PlayerShootingV2 : MonoBehaviour
 
     private void HandleShooting()
     {
-
         // Decrease the fireTimer based on time passed
         fireTimer -= Time.deltaTime;
 

@@ -3,41 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyData : MonoBehaviour
+public class EnemyDataOld : MonoBehaviour
 {
-    //public vars
     [Range(0, 100)] public int probability = 5;
-    public int pointsWorth = 10;
-    public GameObject healingItemPrefab; // Assign a HealingItem prefab in the Inspector
-    
-    //private game Object declaration
-    private Transform eyes;
-
-    //Private components
-    private NavMeshAgent navMeshAgent;
-
-    //private variables
     private int prob_result;
     private double health_points = 3;
+    private NavMeshAgent navMeshAgent;
     private Transform player;
+    public int pointsWorth = 10;
+    public GameObject healingItemPrefab; // Assign a HealingItem prefab in the Inspector
     private bool facingRight = true;
-    private Vector3 distanceVector, mousePosition;
-    private float eyeX, eyeY;
-
-   
 
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        eyes=transform.Find("Head").Find("Skeleton_face");
-        if (eyes==null)
-        {
-           Debug.LogError("Eyes not found"); 
-        }   
     }
-
     void Start()
     {
+
         if (healingItemPrefab == null)
         {
             Debug.LogWarning("Healing prefab is missing!");
@@ -51,6 +34,8 @@ public class EnemyData : MonoBehaviour
             return;
         }
     }
+
+
 
     public void DealDamage(int damage)
     {
@@ -88,25 +73,22 @@ public class EnemyData : MonoBehaviour
         {
             navMeshAgent.SetDestination(player.position);
         }
-        HandleEyeMovement();
+
+        FlipTowardsPlayer();
     }
 
-
-    private void HandleEyeMovement()
+    void FlipTowardsPlayer()
     {
-        distanceVector = player.transform.position - transform.position;
-        distanceVector.x = Mathf.Clamp(distanceVector.x, -7f, 7f);
-        distanceVector.y = Mathf.Clamp(distanceVector.y, -7f, 7f);
-        distanceVector.z = Mathf.Clamp(distanceVector.z, -7f, 7f);
+        if (player == null) return;
 
-        float eye_range_y=0.09f, eye_range_x=0.1f;
-
-        eyeX = Mathf.Lerp(-eye_range_x, eye_range_x, (distanceVector.x + 7f) / 14f);
-        eyeY = Mathf.Lerp(-eye_range_y, eye_range_y, (distanceVector.z + 7f) / 14f);
-
-        // Apply movement
-        eyes.localPosition = new Vector3(eyeX, eyeY, eyes.localPosition.z);
+        if ((player.position.x > transform.position.x && facingRight) ||
+            (player.position.x < transform.position.x && !facingRight))
+        {
+            facingRight = !facingRight;
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
+        }
     }
-
 }
 

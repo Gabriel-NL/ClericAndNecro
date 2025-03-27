@@ -17,12 +17,12 @@ public class TombData : MonoBehaviour
 
     //Invisible variables
     private Vector3 tombstone_position;
-     private Bounds bounds;
+
 
     private void Start()
     {
         tombstone_position = gameObject.transform.position;
-        bounds = gameObject.GetComponent<Renderer>().bounds;
+
     }
     public double GetExtraSpeed()
     {
@@ -49,32 +49,21 @@ public class TombData : MonoBehaviour
     public GameObject SpawnEnemy(GameObject enemy_prefab)
     {
         Vector3 spawnPos;
-        float randomX, randomZ;
         bool isClear;
-        GameObject enemy; 
-        for (int i = 0; i < spawn_attempts; i++)
+        GameObject enemy;
+        spawnPos = gameObject.transform.position;
+        spawnPos.z += enemy_prefab.GetComponent<Renderer>().bounds.extents.z + 5;
+        isClear = Physics.OverlapSphere(spawnPos, enemy_spawn_radius, obstacleLayer).Length == 0;
+        if (isClear)
         {
-            randomX = Random.Range(
-   tombstone_position.x - enemy_spawn_radius - bounds.extents.x,
-   tombstone_position.x + enemy_spawn_radius + bounds.extents.x
-               );
-            randomZ = Random.Range(
-                tombstone_position.z - enemy_spawn_radius - bounds.extents.z,
-                tombstone_position.z + enemy_spawn_radius + bounds.extents.z
-            );
-            spawnPos = new Vector3(randomX, tombstone_position.y, randomZ);
-            // Check for obstacles
-            isClear = Physics.OverlapSphere(spawnPos, enemy_spawn_radius, obstacleLayer).Length == 0;
-            if (isClear)
-            {
-                // Instantiate the enemy and set as child of the tombstone (or other parent)
-                enemy = Instantiate(enemy_prefab, spawnPos, Quaternion.identity);
-                enemy.GetComponent<EnemyData>().AddExtraSpeed(GetExtraSpeed());
-                return enemy;
-            }
-        }return null;
+            // Instantiate the enemy and set as child of the tombstone (or other parent)
+            enemy = Instantiate(enemy_prefab, spawnPos, enemy_prefab.transform.rotation);
+            enemy.GetComponent<EnemyData>().AddExtraSpeed(GetExtraSpeed());
+            return enemy;
+        }
+        else
+        {
+            return null;
+        }
     }
-
-
-
 }
