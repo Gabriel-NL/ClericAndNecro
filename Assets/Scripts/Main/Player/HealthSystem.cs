@@ -9,11 +9,14 @@ public class HealthSystem : MonoBehaviour
     public Transform hearts_parent;
     private Image[] hearts_array;
 
-    public float invincibilityDuration = 1.5f; // Duration of invincibility
-    public bool isInvincible = false; // Tracks if the player is invincible
+    public float invincibilityDuration = 1.5f; 
+    public bool isInvincible = false; 
     public GameOverManager gameOverManager;
 
     private SpriteRenderer[] all_player_sprites;
+
+    public AudioSource damageSound;  // Sound for taking damage
+    public AudioSource deathSound;   // Sound for dying
 
     void Start()
     {
@@ -39,10 +42,19 @@ public class HealthSystem : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        if (isInvincible) return; // Ignore damage if currently invincible
+        if (isInvincible) return; 
 
         currentHealth -= damage;
         UpdateHealthUI();
+
+        if (damageSound != null)
+        {
+            damageSound.Play(); // Play damage sound
+        }
+        else
+        {
+            Debug.LogWarning("Damage sound not assigned!");
+        }
 
         if (currentHealth <= 0)
         {
@@ -50,7 +62,7 @@ public class HealthSystem : MonoBehaviour
         }
         else
         {
-            StartCoroutine(InvincibilityFrames()); // Start invincibility after getting hit
+            StartCoroutine(InvincibilityFrames());
         }
     }
 
@@ -59,27 +71,36 @@ public class HealthSystem : MonoBehaviour
         isInvincible = true;
         float elapsedTime = 0f;
 
-        // Optional: Add a blinking effect to show invincibility
-
         while (elapsedTime < invincibilityDuration)
         {
             foreach (var sprite in all_player_sprites)
             {
-                sprite.enabled = !sprite.enabled; // Toggle visibility
+                sprite.enabled = !sprite.enabled;
             }
 
-            yield return new WaitForSeconds(0.2f); // Blink speed
+            yield return new WaitForSeconds(0.2f);
             elapsedTime += 0.2f;
         }
+        
         foreach (var sprite in all_player_sprites)
         {
-            sprite.enabled = true;// Toggle visibility
+            sprite.enabled = true;
         }
+
         isInvincible = false;
     }
 
     void Die()
     {
+        if (deathSound != null)
+        {
+            deathSound.Play(); // Play death sound
+        }
+        else
+        {
+            Debug.LogWarning("Death sound not assigned!");
+        }
+
         gameOverManager.TriggerGameOver();
         Debug.Log("Player Died!");
         gameObject.SetActive(false);
@@ -95,7 +116,7 @@ public class HealthSystem : MonoBehaviour
 
     public void Heal(int amount)
     {
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // Prevent overheal
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         UpdateHealthUI();
     }
 }

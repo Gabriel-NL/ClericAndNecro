@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 1
+  collectSound: {fileID: 8300000, guid: 996b18c45d382764f94d7765b58822fd, type: 3}
 --- !u!65 &8345665349715114167
 BoxCollider:
   m_ObjectHideFlags: 0

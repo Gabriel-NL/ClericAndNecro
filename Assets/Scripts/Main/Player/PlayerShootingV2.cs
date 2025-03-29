@@ -18,7 +18,7 @@ public class PlayerShootingV2 : MonoBehaviour
     public float angle,eyeX,eyeY;
     public Vector3 distanceVector;
 
-
+    public AudioSource shootSound;
 
 
 
@@ -101,6 +101,16 @@ public class PlayerShootingV2 : MonoBehaviour
         {
 
             GameObject projectile = Instantiate(projectile_prefab, cast_point.position, cast_point.rotation);
+
+            // Play the shooting sound
+            if (shootSound != null)
+            {
+                shootSound.Play();
+            }
+            else
+            {
+                Debug.LogError("Shoot sound is not assigned.");
+            }
         }
         else
         {
