@@ -52,7 +52,7 @@ public class TombData : MonoBehaviour
         bool isClear;
         GameObject enemy;
         spawnPos = gameObject.transform.position;
-        spawnPos.z += enemy_prefab.GetComponent<Renderer>().bounds.extents.z + 5;
+        spawnPos.z -= enemy_prefab.GetComponent<Renderer>().bounds.extents.z - 5;
         isClear = Physics.OverlapSphere(spawnPos, enemy_spawn_radius, obstacleLayer).Length == 0;
         if (isClear)
         {

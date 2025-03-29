@@ -54,7 +54,8 @@ public class Boss : MonoBehaviour
             //Remove parent
             transform.SetParent(null, true);
             Debug.Log("Victory");
-            enemy_control_script.KillAllEnemies();
+            enemy_control_script.Victory();
+
         }
     }
 

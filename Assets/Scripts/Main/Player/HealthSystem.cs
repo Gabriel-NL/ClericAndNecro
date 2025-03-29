@@ -14,6 +14,7 @@ public class HealthSystem : MonoBehaviour
     public GameOverManager gameOverManager;
 
     private SpriteRenderer[] all_player_sprites;
+    private bool is_touching_enemy;
 
     public AudioSource damageSound;  // Sound for taking damage
     public AudioSource deathSound;   // Sound for dying
@@ -36,10 +37,25 @@ public class HealthSystem : MonoBehaviour
     {
         if (collided_obj.collider.CompareTag("Enemy"))
         {
-            TakeDamage(1);
+            is_touching_enemy=true;
         }
     }
+    private void OnCollisionExit(Collision collided_obj)
+    {
+        if (collided_obj.collider.CompareTag("Enemy"))
+        {
+            is_touching_enemy=false;
+        }
+    }
+    
 
+void FixedUpdate()
+{
+    if (is_touching_enemy==true && isInvincible==false)
+    {
+        TakeDamage(1);
+    }
+}
     void TakeDamage(int damage)
     {
         if (isInvincible) return; 

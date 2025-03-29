@@ -23,6 +23,7 @@ public class EnemyData : MonoBehaviour
     private bool facingRight = true;
     private Vector3 distanceVector, mousePosition;
     private float eyeX, eyeY;
+    private BreakStateController breakStateController;
 
    
 
@@ -33,7 +34,18 @@ public class EnemyData : MonoBehaviour
         if (eyes==null)
         {
            Debug.LogError("Eyes not found"); 
-        }   
+        }  
+        player=GameObject.FindWithTag("Player").transform;
+        if (player==null)
+        {
+            Debug.LogError("Player not found");
+        }
+        breakStateController=GetComponent<BreakStateController>();
+        if (breakStateController==null)
+        {
+            Debug.LogError("BreakStateController not found");
+        }
+        navMeshAgent.SetDestination(player.position);
     }
 
     void Start()
@@ -57,6 +69,8 @@ public class EnemyData : MonoBehaviour
         if (health_points > damage)
         {
             health_points -= damage;
+            breakStateController.NextState();
+
         }
         else
         {
@@ -84,7 +98,7 @@ public class EnemyData : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!navMeshAgent.pathPending && Vector3.Distance(navMeshAgent.destination, player.position) > 0.1f)
+        if (!navMeshAgent.pathPending )
         {
             navMeshAgent.SetDestination(player.position);
         }

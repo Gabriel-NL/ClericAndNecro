@@ -3842,16 +3842,16 @@ MonoBehaviour:
   margin: 10
   checkRadius: 10
   wave: 0
-  last_wave: 2
+  last_wave: 5
   tombstone_internal_clock: 1.5
   enemy_prefab: {fileID: 6374228204958778015, guid: fdb37c062f0a62f41b0e9a98dace4535, type: 3}
   enemy_internal_clock: 1
-  max_number_enemies: 5
+  max_number_enemies: 6
   enemy_list_parent: {fileID: 229795919}
   canSpawn: 1
   min_bounds: {x: 0, y: 0, z: 0}
   max_bounds: {x: 0, y: 0, z: 0}
-  boss: {fileID: 0}
+  boss: {fileID: 8815973810723786133, guid: 5152a1fc85e1ae0489c9cc2babf18ff1, type: 3}
 --- !u!114 &961288330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9353,7 +9353,7 @@ MonoBehaviour:
   maxHealth: 3
   hearts_parent: {fileID: 629037842}
   invincibilityDuration: 1.5
-  isInvincible: 0
+  isInvincible: 1
   gameOverManager: {fileID: 961288334}
   damageSound: {fileID: 2069908627}
   deathSound: {fileID: 1948838677}
@@ -9884,7 +9884,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375692257086209129}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

@@ -45,7 +45,7 @@ public class EnemyControl : MonoBehaviour
     private Vector3 min_bounds, max_bounds;
     [SerializeField] private Boss boss;
     private Action<Transform> on_tombstone_destroy_function;
-    private int tomb_name_index=0;
+    private int tomb_name_index = 0;
     private Coroutine tomb_spawner;
 
 
@@ -58,8 +58,8 @@ public class EnemyControl : MonoBehaviour
         on_tombstone_destroy_function = DefaultTombstoneDestroyBehaviour;
 
         (min_bounds, max_bounds) = CalculateSpawnBounds();
-        
-        tomb_spawner =StartCoroutine(TombstoneSpawner());
+
+        tomb_spawner = StartCoroutine(TombstoneSpawner());
         StartCoroutine(EnemySpawner());
         wave = 1;
         UpdateWaveUI();
@@ -126,8 +126,8 @@ public class EnemyControl : MonoBehaviour
             {
                 // Instantiate and set as child of spawnParent
                 tombstone = Instantiate(tombstone_prefab, spawnPos, tombstone_prefab.transform.rotation);
-                tombstone.name="tomb "+tomb_name_index++;
-                
+                tombstone.name = "tomb " + tomb_name_index++;
+
 
                 tombstone.transform.SetParent(spawnParent, worldPositionStays: true);
 
@@ -150,16 +150,16 @@ public class EnemyControl : MonoBehaviour
 
     public void DefaultTombstoneDestroyBehaviour(Transform destroyed_obj)
     {
-        if (generated_tombstones.Count <= 0 )
+        if (generated_tombstones.Count <= 0)
         {
             wave += 1;
-            tombstone_limit = wave*2;
+            tombstone_limit = wave * 2;
             max_number_enemies += 2;
             UpdateWaveUI();
             StartCoroutine(TombstoneSpawner());
         }
-        
-        
+
+
     }
 
     public void BossTombstoneDestroyBehaviour(Transform destroyed_obj)
@@ -170,7 +170,7 @@ public class EnemyControl : MonoBehaviour
         {
             boss.RandomNewTombstone();
         }
-        
+
     }
 
     private IEnumerator EnemySpawner()
@@ -178,7 +178,8 @@ public class EnemyControl : MonoBehaviour
         yield return new WaitForSeconds(tombstone_internal_clock);
 
         GameObject new_enemy;
-        while (enemies_generated.Count != max_number_enemies)
+
+        while (true)
         {
             foreach (var tomb in generated_tombstones)
             {
@@ -188,25 +189,33 @@ public class EnemyControl : MonoBehaviour
                     if (new_enemy != null)
                     {
                         enemies_generated.Add(new_enemy);
+                        Debug.Log("tomb: " + tomb.name + "Spawned enemy");
                         //new_enemy.transform.SetParent(enemy_list_parent.transform, true);
                     }
                     else
                     {
                         continue;
                     }
-                }else
+                }
+                else
                 {
                     break;
                 }
             }
-    
-            yield return new WaitForSeconds(5);
+
+            yield return new WaitForSeconds(tombstone_internal_clock);
         }
     }
 
     public void OnEnemyDestroy(GameObject destroyed_obj)
     {
         enemies_generated.Remove(destroyed_obj);
+
+        foreach (GameObject item in enemies_generated)
+        {
+            item.GetComponent<NavMeshAgent>().avoidancePriority-=1;
+            
+        }
     }
 
     private void UpdateWaveUI()
@@ -238,13 +247,19 @@ public class EnemyControl : MonoBehaviour
         }
         return positions;
     }
-    public void KillAllEnemies(){
-        GameObject[] enemy_cleared= enemies_generated.ToArray();
+    public void KillAllEnemies()
+    {
+        GameObject[] enemy_cleared = enemies_generated.ToArray();
         for (int i = 0; i < enemy_cleared.Length; i++)
         {
             enemy_cleared[i].GetComponent<EnemyData>().TriggerDeath();
         }
         enemies_generated.Clear();
-        
+
     }
+    public void Victory(){
+        KillAllEnemies();
+    }
+
+
 }
