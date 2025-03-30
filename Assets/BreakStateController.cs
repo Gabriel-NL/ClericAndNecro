@@ -21,7 +21,7 @@ public class BreakStateController : MonoBehaviour
         if (active==false)
         {
         Color new_color=target_sprite.color;
-        new_color.a = 0.7f;
+        new_color.a = 0.9f;
         target_sprite.color=new_color;
         active=true;         
         }

@@ -17,11 +17,17 @@ public class TombData : MonoBehaviour
 
     //Invisible variables
     private Vector3 tombstone_position;
+    private BreakStateController breakStateController;
 
 
     private void Start()
     {
         tombstone_position = gameObject.transform.position;
+        breakStateController = GetComponent<BreakStateController>();
+        if (breakStateController == null)
+        {
+            Debug.LogError("BreakStateController not found");
+        }
 
     }
     public double GetExtraSpeed()
@@ -35,6 +41,7 @@ public class TombData : MonoBehaviour
         if (tombstone_hp > damage)
         {
             tombstone_hp -= damage;
+            breakStateController.NextState();
         }
         else
         {

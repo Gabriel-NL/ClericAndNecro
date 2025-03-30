@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d3e13facaeac56c4ab4584a57c279394
+guid: 5d2676e8be2184048aaaa060ece8e0cf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton_face
+      name: campfire_fire_0
       rect:
         serializedVersion: 2
-        x: 59
-        y: 110
+        x: 2
+        y: 112
         width: 12
-        height: 7
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b09c49fa3110c854fb92b4730e606192
-      internalID: -100537129
+      spriteID: f5e35393683bc68429ff481a16b4a5da
+      internalID: -1400697338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_head
+      name: campfire_fire_3
       rect:
         serializedVersion: 2
-        x: 56
-        y: 94
-        width: 18
-        height: 13
+        x: 2
+        y: 64
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06bd108798299874b8c288e1e06dd2d5
-      internalID: -403583288
+      spriteID: 0aa857742b4c4cf4b8a4f7f393abb9d8
+      internalID: 417926356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_right_arm
+      name: campfire_fire_4
       rect:
         serializedVersion: 2
-        x: 81
-        y: 79
-        width: 4
-        height: 8
+        x: 2
+        y: 48
+        width: 12
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27b5e04406143ff46a1c27bd7775e637
-      internalID: 769099075
+      spriteID: f3d5e3188cdecf542a60cd28a72bbfc8
+      internalID: -1534190205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_left_arm
+      name: campfire_fire_5
       rect:
         serializedVersion: 2
-        x: 42
-        y: 79
-        width: 4
-        height: 8
+        x: 2
+        y: 32
+        width: 12
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce3f3c910b089a14081f70bd9676786a
-      internalID: -1439161915
+      spriteID: 7729ca9777d7dc04082d15804a1cc20e
+      internalID: -1919400584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_torso
+      name: campfire_fire_6
       rect:
         serializedVersion: 2
-        x: 61
-        y: 78
-        width: 8
-        height: 10
+        x: 3
+        y: 16
+        width: 10
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,71 +195,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67d7576548f5917488d93661b49fdc94
-      internalID: -463713991
+      spriteID: 3b38e5a4a5b86b242833e5f2ee4fac09
+      internalID: 611700737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_right_leg
+      name: campfire_fire_7
       rect:
         serializedVersion: 2
-        x: 77
-        y: 60
-        width: 2
-        height: 5
-      alignment: 9
-      pivot: {x: 0.5, y: 0.8}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 02df6d2d2b624174d86bdbb3f72e8319
-      internalID: -464195900
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton_left_leg
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 60
-        width: 2
-        height: 5
-      alignment: 9
-      pivot: {x: 0.5, y: 0.8}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4368695db24f95c4398dc68e43ce37b6
-      internalID: -1245586652
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skeleton_skull
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 21
-        width: 18
-        height: 13
+        x: 2
+        y: 0
+        width: 11
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bcdee2bc2fa27d4db59ae640f819099
-      internalID: -413978553
+      spriteID: 76721c2e42dedbb418034decdb535ee0
+      internalID: 1689922903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: campfire_fire_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 96
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b49ac44762a25b4498169c56be246195
+      internalID: 573551687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: campfire_fire_2
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 80
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4889fcd982ca06f41a4d152077e874a6
+      internalID: 252825118
       vertices: []
       indices: 
       edges: []
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton_face: -100537129
-      Skeleton_head: -403583288
-      Skeleton_left_arm: -1439161915
-      Skeleton_left_leg: -1245586652
-      Skeleton_right_arm: 769099075
-      Skeleton_right_leg: -464195900
-      Skeleton_skull: -413978553
-      Skeleton_torso: -463713991
+      campfire_fire_0: -1400697338
+      campfire_fire_1: 573551687
+      campfire_fire_2: 252825118
+      campfire_fire_3: 417926356
+      campfire_fire_4: -1534190205
+      campfire_fire_5: -1919400584
+      campfire_fire_6: 611700737
+      campfire_fire_7: 1689922903
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
