@@ -24,6 +24,8 @@ public class EnemyData : MonoBehaviour
     private Vector3 distanceVector, mousePosition;
     private float eyeX, eyeY;
     private BreakStateController breakStateController;
+    public AudioClip skeletonDamage;
+    public AudioClip skeletonDeath;
 
    
 
@@ -70,7 +72,7 @@ public class EnemyData : MonoBehaviour
         {
             health_points -= damage;
             breakStateController.NextState();
-
+            PlayDamage();
         }
         else
         {
@@ -89,6 +91,7 @@ public class EnemyData : MonoBehaviour
         // Add score when enemy is killed
         ScoreManager.Instance.AddScore(pointsWorth);
         Destroy(gameObject);
+        PlayDeath();
     }
 
     public void AddExtraSpeed(double extra_speed)
@@ -122,5 +125,34 @@ public class EnemyData : MonoBehaviour
         eyes.localPosition = new Vector3(eyeX, eyeY, eyes.localPosition.z);
     }
 
+    void PlayDamage()
+    {
+        if (skeletonDamage != null)
+        {
+            // Create a temporary GameObject to play the sound
+            GameObject audioObject = new GameObject("SkeletonDamage");
+            AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+            audioSource.clip = skeletonDamage;
+            audioSource.Play();
+
+            // Destroy the temporary GameObject after the clip finishes playing
+            Destroy(audioObject, skeletonDamage.length);
+        }
+    }
+
+    void PlayDeath()
+    {
+        if (skeletonDeath != null)
+        {
+            // Create a temporary GameObject to play the sound
+            GameObject audioObject = new GameObject("SkeletonDeath");
+            AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+            audioSource.clip = skeletonDeath;
+            audioSource.Play();
+
+            // Destroy the temporary GameObject after the clip finishes playing
+            Destroy(audioObject, skeletonDeath.length);
+        }
+    }
 }
 

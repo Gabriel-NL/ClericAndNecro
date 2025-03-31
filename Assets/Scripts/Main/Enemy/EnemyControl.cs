@@ -48,6 +48,9 @@ public class EnemyControl : MonoBehaviour
     private int tomb_name_index = 0;
     private Coroutine tomb_spawner;
 
+    public AudioSource backgroundMusic;
+    public AudioSource bossMusic;
+
 
     void Start()
     {
@@ -237,6 +240,16 @@ public class EnemyControl : MonoBehaviour
         boss.RandomNewTombstone();
         int randomIndex = Random.Range(0, generated_tombstones.Count);
         on_tombstone_destroy_function = BossTombstoneDestroyBehaviour;
+
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.Stop();
+        }
+
+        if (bossMusic != null)
+        {
+            bossMusic.Play();
+        }
     }
     public Transform[] GetTombstoneTransforms()
     {

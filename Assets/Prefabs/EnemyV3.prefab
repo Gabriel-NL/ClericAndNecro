@@ -978,6 +978,8 @@ MonoBehaviour:
   probability: 5
   pointsWorth: 10
   healingItemPrefab: {fileID: 6174147035106072592, guid: 62bcd9a2530dad644be09f4396036ea2, type: 3}
+  skeletonDamage: {fileID: 8300000, guid: e711479a0f0ee33479ae51ec76efe22a, type: 3}
+  skeletonDeath: {fileID: 8300000, guid: f06ab18e61ef69b46b69feb8592bbacc, type: 3}
 --- !u!65 &1227414887937342791
 BoxCollider:
   m_ObjectHideFlags: 0

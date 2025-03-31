@@ -17,6 +17,9 @@ public class GameOverManager : MonoBehaviour
     public float fadeDuration = 2f;
     private int finalScore;
 
+    public AudioSource backgroundMusic; // Reference to background music
+    public AudioSource gameOverMusic;    // Reference to gameover theme
+
     private void Start()
     {
         // Hide all UI elements except the input field initially
@@ -33,6 +36,15 @@ public class GameOverManager : MonoBehaviour
     {
         finalScore = ScoreManager.Instance.score;
         finalScoreText.text = "Final Score: " + finalScore;
+
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.Stop();
+        }
+        if (gameOverMusic != null)
+        {
+            gameOverMusic.Play();
+        }
 
         StartCoroutine(FadeToBlack());
     }
