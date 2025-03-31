@@ -19,6 +19,8 @@ public class TombData : MonoBehaviour
     private Vector3 tombstone_position;
     private BreakStateController breakStateController;
 
+    public AudioClip tombDestroyed;
+
 
     private void Start()
     {
@@ -47,6 +49,7 @@ public class TombData : MonoBehaviour
         {
             FindAnyObjectByType<EnemyControl>().OnTombstoneDestroy(transform);
             Destroy(gameObject);
+            PlaySound();
 
             // Add score when enemy is killed
             ScoreManager.Instance.AddScore(points_worth);
@@ -71,6 +74,21 @@ public class TombData : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    void PlaySound()
+    {
+        if (tombDestroyed != null)
+        {
+            // Create a temporary GameObject to play the sound
+            GameObject audioObject = new GameObject("SkeletonDamage");
+            AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+            audioSource.clip = tombDestroyed;
+            audioSource.Play();
+
+            // Destroy the temporary GameObject after the clip finishes playing
+            Destroy(audioObject, tombDestroyed.length);
         }
     }
 }
