@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   necro_magic_prefab: {fileID: 4189077195575299743, guid: 66bf0c0ec48e4624bb6ec04e346179b2, type: 3}
+  obstacle_prefab: {fileID: 5266488140761541693, guid: bc5be6a06c138d9458cd6921f7d8301a, type: 3}
 --- !u!1 &2716933851946637157
 GameObject:
   m_ObjectHideFlags: 0

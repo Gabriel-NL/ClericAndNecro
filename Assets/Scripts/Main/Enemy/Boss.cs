@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
 
     private float magic_fire_rate = 2.5f;
     private float magic_speed = 9f;
-    private int obstacle_layer=7;
+    private int obstacle_layer = 7;
 
 
     void Awake()
@@ -83,21 +83,21 @@ public class Boss : MonoBehaviour
             {
                 foreach (Collider hit in hit_skeletons)
                 {
-                    Instantiate(obstacle_prefab, hit.transform.position, Quaternion.identity); // Place obstacle at explosion center
+                    Instantiate(obstacle_prefab, hit.transform.position, obstacle_prefab.transform.rotation); // Place obstacle at explosion center
                     Destroy(hit.gameObject); // Destroy skeletons
 
                 }
-                Destroy(magicProjectile);
-                continue;
-            }else
-            {
-                 Vector3 spawnPos = FindNearestAvailablePosition(explosion_center, explosion_radius/2);
-            Instantiate(obstacle_prefab, spawnPos, Quaternion.identity);
+
+
             }
+            else
+            {
+                Vector3 spawnPos = FindNearestAvailablePosition(explosion_center, explosion_radius / 2);
+                Instantiate(obstacle_prefab, spawnPos,obstacle_prefab.transform.rotation);
+            }
+            Destroy(magicProjectile);
 
-   
 
-            // Destroy the projectile once it reaches the target position
 
         }
 
