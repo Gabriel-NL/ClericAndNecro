@@ -343,6 +343,7 @@ MonoBehaviour:
   tombstone_hp: 5
   points_worth: 100
   spawn_attempts: 5
+  tombDestroyed: {fileID: 8300000, guid: 2f8a9579a1068ae4cb93f3ebbf0cdcc4, type: 3}
 --- !u!331 &3377615408705553815
 SpriteMask:
   m_ObjectHideFlags: 0
