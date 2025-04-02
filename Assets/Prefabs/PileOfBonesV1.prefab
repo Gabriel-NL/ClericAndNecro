@@ -99,9 +99,10 @@ GameObject:
   - component: {fileID: 1496541643673523901}
   - component: {fileID: 3377615408705553815}
   - component: {fileID: 7354745579104712711}
+  - component: {fileID: 7239103855983862816}
   m_Layer: 7
   m_Name: PileOfBonesV1
-  m_TagString: Tomb
+  m_TagString: PileBones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 5266488140761541693}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 2, z: 10}
+  m_LocalPosition: {x: 10, y: 2.3, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -311,5 +312,18 @@ MonoBehaviour:
   - {fileID: 1799753218, guid: 1169555d0e6b1174e9fdbe8729741509, type: 3}
   - {fileID: 182312365, guid: 1169555d0e6b1174e9fdbe8729741509, type: 3}
   - {fileID: -1184011260, guid: 1169555d0e6b1174e9fdbe8729741509, type: 3}
-  - {fileID: -1783787523, guid: 1169555d0e6b1174e9fdbe8729741509, type: 3}
   target_sprite: {fileID: 7340235564300297049}
+--- !u!114 &7239103855983862816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266488140761541693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77b97074bda26e478aa3dea9bb6a288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  break_status_script: {fileID: 0}
+  health: 0
