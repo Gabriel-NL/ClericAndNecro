@@ -39,10 +39,7 @@ public class VictoryScreen : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V)) 
-        {
-            TriggerVictory();
-        }
+        
     }
 
     public void TriggerVictory()

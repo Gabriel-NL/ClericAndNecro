@@ -47,13 +47,14 @@ public class EnemyControl : MonoBehaviour
     private Action<Transform> on_tombstone_destroy_function;
     private int tomb_name_index = 0;
     private Coroutine tomb_spawner;
-
+    private VictoryScreen victoryScreen;
     public AudioSource backgroundMusic;
     public AudioSource bossMusic;
 
 
     void Start()
     {
+        victoryScreen = FindObjectOfType<VictoryScreen>(); // Finds the VictoryScreen in the scene
         if (tombstone_prefab == null)
         {
             throw new ArgumentNullException(nameof(tombstone_prefab), "Tombstone prefab is null!");
@@ -272,6 +273,15 @@ public class EnemyControl : MonoBehaviour
     }
     public void Victory(){
         KillAllEnemies();
+        
+        if (victoryScreen != null)
+        {
+            victoryScreen.TriggerVictory();
+        }
+        else
+        {
+            Debug.LogError("VictoryScreen script not found in the scene!");
+        }
     }
 
 
