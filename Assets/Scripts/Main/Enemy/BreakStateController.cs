@@ -28,6 +28,18 @@ public class BreakStateController : MonoBehaviour
         target_sprite.sprite=states[current_state];
         current_state++;
     }
+    public void NextState(int damage){
+        if (active==false)
+        {
+        Color new_color=target_sprite.color;
+        new_color.a = 0.9f;
+        target_sprite.color=new_color;
+        active=true;         
+        }
+        current_state+=damage;
+        target_sprite.sprite=states[current_state];
+        current_state++;
+    }
 
 
 }

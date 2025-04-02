@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -16,12 +17,18 @@ public class Projectile : MonoBehaviour
             case "Enemy":
             target_hit.gameObject.GetComponent<EnemyData>().DealDamage(damage);
             break;
+
             case "Tomb":
             target_hit.gameObject.GetComponent<TombData>().DealDamage(damage);
             break;
+
             case "MapBorder":
-            Debug.Log("Hit wall");
             break;
+
+            case "PileBones":
+            target_hit.gameObject.GetComponent<BreakStateController>().NextState();
+            break;
+
 
             default:
             break;

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Tomb
   - EnemyList
+  - PileBones
   layers:
   - Default
   - TransparentFX
