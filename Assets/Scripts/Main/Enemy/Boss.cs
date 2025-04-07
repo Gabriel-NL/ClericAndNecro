@@ -41,8 +41,6 @@ public class Boss : MonoBehaviour
             }
         }
         StartCoroutine(StartShootingMagic());
-
-        animator.SetTrigger("NecroDefeated");
     }
 
     public IEnumerator StartShootingMagic()
@@ -157,5 +155,9 @@ public class Boss : MonoBehaviour
     {
         return current_tomb;
     }
-
+    
+    private void BossDeath()
+    {
+        animator.SetTrigger("NecroDefeated");
+    }
 }
