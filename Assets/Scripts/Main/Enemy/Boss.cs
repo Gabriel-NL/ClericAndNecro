@@ -11,9 +11,10 @@ public class Boss : MonoBehaviour
     private Transform player;
     private EnemyControl enemy_control_script;
     private Transform current_tomb;
-
     private int boss_hp = 20;
     private NavMeshAgent navMeshAgent;
+    public Animator animator;
+
 
     private float magic_fire_rate = 2.5f;
     private float magic_speed = 9f;
@@ -41,7 +42,7 @@ public class Boss : MonoBehaviour
         }
         StartCoroutine(StartShootingMagic());
 
-
+        animator.SetTrigger("NecroDefeated");
     }
 
     public IEnumerator StartShootingMagic()

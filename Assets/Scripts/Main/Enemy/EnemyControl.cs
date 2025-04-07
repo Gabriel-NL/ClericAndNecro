@@ -276,6 +276,7 @@ public class EnemyControl : MonoBehaviour
         
         if (victoryScreen != null)
         {
+            bossMusic.Stop();
             victoryScreen.TriggerVictory();
         }
         else
