@@ -38,7 +38,6 @@ public class BreakStateController : MonoBehaviour
         }
         current_state+=damage;
         target_sprite.sprite=states[current_state];
-        current_state++;
     }
 
 

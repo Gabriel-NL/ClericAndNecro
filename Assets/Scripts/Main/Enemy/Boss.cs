@@ -83,8 +83,8 @@ public class Boss : MonoBehaviour
             {
                 foreach (Collider hit in hit_skeletons)
                 {
-                    Instantiate(obstacle_prefab, hit.transform.position, obstacle_prefab.transform.rotation); // Place obstacle at explosion center
-                    Destroy(hit.gameObject); // Destroy skeletons
+                    //Instantiate(obstacle_prefab, hit.transform.position, obstacle_prefab.transform.rotation); // Place obstacle at explosion center
+                    //Destroy(hit.gameObject); // Destroy skeletons
 
                 }
 
@@ -92,8 +92,8 @@ public class Boss : MonoBehaviour
             }
             else
             {
-                Vector3 spawnPos = FindNearestAvailablePosition(explosion_center, explosion_radius / 2);
-                Instantiate(obstacle_prefab, spawnPos,obstacle_prefab.transform.rotation);
+                //Vector3 spawnPos = FindNearestAvailablePosition(explosion_center, explosion_radius / 2);
+                //Instantiate(obstacle_prefab, spawnPos,obstacle_prefab.transform.rotation);
             }
             Destroy(magicProjectile);
 
