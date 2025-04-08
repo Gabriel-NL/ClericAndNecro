@@ -124,7 +124,7 @@ public class EnemyControl : MonoBehaviour
                 forbidden_coordinates.Add(spawnPos);
             }
             // Check for obstacles
-            isClear = Physics.OverlapSphere(spawnPos, checkRadius, obstacleLayer).Length == 0;
+            isClear = Physics.OverlapSphere(spawnPos, checkRadius, obstacleLayer).Length == 0 && Physics.OverlapSphere(spawnPos, checkRadius, C_A_N_Constants.SKELETON_LAYER_INDEX).Length ==0;
 
             if (isClear)
             {

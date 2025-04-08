@@ -10,7 +10,7 @@ public class TombData : MonoBehaviour
     public double extra_speed = 0;
     public LayerMask obstacleLayer; // Layer for collision checking
     [Header("Editable Variables")]
-    public int tombstone_hp = 5;
+    public int tombstone_hp = 5,max_hp=5;
     public int points_worth = 100;
     public int spawn_attempts = 20;
     private float enemy_spawn_radius = 3;
@@ -56,6 +56,14 @@ public class TombData : MonoBehaviour
         }
     }
 
+public void HealTomb(int heal_value){
+    tombstone_hp+=heal_value;
+
+    if (tombstone_hp >max_hp ){
+        tombstone_hp = max_hp;
+    }
+    breakStateController.RevertDamage(heal_value);
+}
     public GameObject SpawnEnemy(GameObject enemy_prefab)
     {
         Vector3 spawnPos;

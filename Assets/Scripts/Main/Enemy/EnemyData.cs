@@ -9,7 +9,7 @@ public class EnemyData : MonoBehaviour
     [Range(0, 100)] public int probability = 5;
     public int pointsWorth = 10;
     public GameObject healingItemPrefab; // Assign a HealingItem prefab in the Inspector
-    
+
     //private game Object declaration
     private Transform eyes;
 
@@ -18,7 +18,7 @@ public class EnemyData : MonoBehaviour
 
     //private variables
     private int prob_result;
-    private double health_points = 3;
+    private int health_points = 3, max_hp = 3;
     private Transform player;
     private bool facingRight = true;
     private Vector3 distanceVector, mousePosition;
@@ -27,23 +27,23 @@ public class EnemyData : MonoBehaviour
     public AudioClip skeletonDamage;
     public AudioClip skeletonDeath;
 
-   
+
 
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        eyes=transform.Find("Head").Find("Skeleton_face");
-        if (eyes==null)
+        eyes = transform.Find("Head").Find("Skeleton_face");
+        if (eyes == null)
         {
-           Debug.LogError("Eyes not found"); 
-        }  
-        player=GameObject.FindWithTag("Player").transform;
-        if (player==null)
+            Debug.LogError("Eyes not found");
+        }
+        player = GameObject.FindWithTag("Player").transform;
+        if (player == null)
         {
             Debug.LogError("Player not found");
         }
-        breakStateController=GetComponent<BreakStateController>();
-        if (breakStateController==null)
+        breakStateController = GetComponent<BreakStateController>();
+        if (breakStateController == null)
         {
             Debug.LogError("BreakStateController not found");
         }
@@ -93,6 +93,16 @@ public class EnemyData : MonoBehaviour
         Destroy(gameObject);
         PlayDeath();
     }
+    public void Healed(int heal_value)
+    {
+        health_points += heal_value;
+
+        if (health_points > max_hp)
+        {
+            health_points = max_hp;
+        }
+        breakStateController.RevertDamage(heal_value);
+    }
 
     public void AddExtraSpeed(double extra_speed)
     {
@@ -101,7 +111,7 @@ public class EnemyData : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!navMeshAgent.pathPending )
+        if (!navMeshAgent.pathPending)
         {
             navMeshAgent.SetDestination(player.position);
         }
@@ -116,7 +126,7 @@ public class EnemyData : MonoBehaviour
         distanceVector.y = Mathf.Clamp(distanceVector.y, -7f, 7f);
         distanceVector.z = Mathf.Clamp(distanceVector.z, -7f, 7f);
 
-        float eye_range_y=0.09f, eye_range_x=0.1f;
+        float eye_range_y = 0.09f, eye_range_x = 0.1f;
 
         eyeX = Mathf.Lerp(-eye_range_x, eye_range_x, (distanceVector.x + 7f) / 14f);
         eyeY = Mathf.Lerp(-eye_range_y, eye_range_y, (distanceVector.z + 7f) / 14f);

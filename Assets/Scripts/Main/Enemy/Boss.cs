@@ -41,6 +41,7 @@ public class Boss : MonoBehaviour
             }
         }
         StartCoroutine(StartShootingMagic());
+
     }
 
     public IEnumerator StartShootingMagic()
@@ -74,33 +75,50 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(timeToReach);
 
             Vector3 explosion_center = magicProjectile.transform.position;
-            float explosion_radius = 4.0f;
-            int skeleton_layer = 8;
-            Collider[] hit_skeletons = Physics.OverlapSphere(explosion_center, explosion_radius, skeleton_layer);
+            float explosion_radius = 5.0f;
 
-            if (hit_skeletons.Length > 0)
-            {
-                foreach (Collider hit in hit_skeletons)
-                {
-                    //Instantiate(obstacle_prefab, hit.transform.position, obstacle_prefab.transform.rotation); // Place obstacle at explosion center
-                    //Destroy(hit.gameObject); // Destroy skeletons
-
-                }
-
-
-            }
-            else
-            {
-                //Vector3 spawnPos = FindNearestAvailablePosition(explosion_center, explosion_radius / 2);
-                //Instantiate(obstacle_prefab, spawnPos,obstacle_prefab.transform.rotation);
-            }
+            HandleMagicPrefabCollisions(explosion_center, explosion_radius);
             Destroy(magicProjectile);
-
-
-
         }
 
     }
+
+    private void HandleMagicPrefabCollisions(Vector3 sphere_center, float sphere_radius)
+    {
+        List<Collider> all_objects_hit = new List<Collider>();
+        all_objects_hit.AddRange(Physics.OverlapSphere(sphere_center, sphere_radius, C_A_N_Constants.OBJECT_LAYER_INDEX));
+        all_objects_hit.AddRange(Physics.OverlapSphere(sphere_center, sphere_radius, C_A_N_Constants.SKELETON_LAYER_INDEX));
+
+        if (all_objects_hit.Count == 0)
+        {
+            Vector3 spawnPos = FindNearestAvailablePosition(sphere_center, sphere_radius / 2);
+            Instantiate(obstacle_prefab, spawnPos, obstacle_prefab.transform.rotation);
+            return;
+        }
+
+        foreach (Collider obj in all_objects_hit)
+        {
+            if (obj.CompareTag("Tomb"))
+            {
+                obj.GetComponent<TombData>().HealTomb(3);
+                continue;
+            }
+            if (obj.CompareTag("Skeleton"))
+            {
+                obj.GetComponent<EnemyData>().Healed(2);
+                continue;
+            }
+            if (obj.CompareTag("Player"))
+            {
+                obj.GetComponent<HealthSystem>().TakeDamage(2);
+                continue;
+            }
+        }
+
+
+    }
+
+
     private Vector3 FindNearestAvailablePosition(Vector3 center, float radius)
     {
         Vector3 bestPos = center;
@@ -143,9 +161,11 @@ public class Boss : MonoBehaviour
             transform.SetParent(null, true);
             Debug.Log("Victory");
             enemy_control_script.Victory();
+            BossDeath();
 
         }
     }
+
 
     public void SetPosition(Vector3 new_pos)
     {
@@ -155,9 +175,15 @@ public class Boss : MonoBehaviour
     {
         return current_tomb;
     }
-    
+
     private void BossDeath()
     {
         animator.SetTrigger("NecroDefeated");
+        float delay_for_delete = animator.GetAnimatorTransitionInfo(0).duration;
+        Invoke("BossRemoval", delay_for_delete);
+    }
+    private void BossRemoval()
+    {
+        Destroy(gameObject);
     }
 }

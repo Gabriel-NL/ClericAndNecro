@@ -9,8 +9,8 @@ public class HealthSystem : MonoBehaviour
     public Transform hearts_parent;
     private Image[] hearts_array;
 
-    public float invincibilityDuration = 1.5f; 
-    public bool isInvincible = false; 
+    public float invincibilityDuration = 1.5f;
+    public bool isInvincible = false;
     public GameOverManager gameOverManager;
 
     private SpriteRenderer[] all_player_sprites;
@@ -37,28 +37,28 @@ public class HealthSystem : MonoBehaviour
     {
         if (collided_obj.collider.CompareTag("Enemy"))
         {
-            is_touching_enemy=true;
+            is_touching_enemy = true;
         }
     }
     private void OnCollisionExit(Collision collided_obj)
     {
         if (collided_obj.collider.CompareTag("Enemy"))
         {
-            is_touching_enemy=false;
+            is_touching_enemy = false;
         }
     }
-    
 
-void FixedUpdate()
-{
-    if (is_touching_enemy==true && isInvincible==false)
+
+    void FixedUpdate()
     {
-        TakeDamage(1);
+        if (is_touching_enemy == true && isInvincible == false)
+        {
+            TakeDamage(1);
+        }
     }
-}
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        if (isInvincible) return; 
+        if (isInvincible) return;
 
         currentHealth -= damage;
         UpdateHealthUI();
@@ -97,7 +97,7 @@ void FixedUpdate()
             yield return new WaitForSeconds(0.2f);
             elapsedTime += 0.2f;
         }
-        
+
         foreach (var sprite in all_player_sprites)
         {
             sprite.enabled = true;
