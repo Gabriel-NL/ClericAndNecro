@@ -4048,7 +4048,7 @@ MonoBehaviour:
   margin: 10
   checkRadius: 10
   wave: 0
-  last_wave: 2
+  last_wave: 5
   tombstone_internal_clock: 1.5
   enemy_prefab: {fileID: 6374228204958778015, guid: fdb37c062f0a62f41b0e9a98dace4535, type: 3}
   enemy_internal_clock: 1
